@@ -33,18 +33,18 @@
                 </div>
 				
 				<%
-					String table = request.getParameter("tableName");
-					
-					
+					String table = request.getParameter("tableName");					
 					ArrayList<String[]> results = null;
 					DatabaseController dbcontroller = new DatabaseController();
 					dbcontroller.Open();
 
 					if(table == null){
-						results = dbcontroller.DisplayTable("employee");
-					}else{
-						results = dbcontroller.DisplayTable(table);
+						table = "employee";
 					}
+					out.write("<h1 style='text-align:center;font-size:50px;padding-bottom:15px'>" + table.substring(0,1).toUpperCase() + table.substring(1) + "s</h1>");
+					String tName = table.substring(0,1).toUpperCase() + table.substring(1);
+					results = dbcontroller.DisplayTable(table);
+					
 					
 					if(results != null && results.size() > 0){
 						out.write("<table class='mui-table myTable'>");	
