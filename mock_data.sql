@@ -1,8 +1,8 @@
-insert into Employee values (12345,'Jarryd Goodman',TO_DATE('1989-12-09','YYYY-MM-DD'),'M','Instructor',10,5203952912,'555 E 10th st Tucson, AZ 85716',333);
-insert into Employee values (23451,'Min Kwon',TO_DATE('1992-12-01','YYYY-MM-DD'),'M','Senior Instructor',10,520354324,'556 E 10th st Tucson, AZ 85716',222);
-insert into Employee values (34512,'Ryan Melzer',TO_DATE('1990-08-26','YYYY-MM-DD'),'M','Senior Instructor',20,5205555555,'557 E 10th st Tucson, AZ 85716',111);
-insert into Employee values (45123,'Christopher Stepanski',TO_DATE('1996-07-20','YYYY-MM-DD'),'F','Admistrative staff',10,3949293493,'558 E 10th st Tucson, AZ 85716',null);
-insert into Employee values (51234,'Shuo YAANNNGGGGGG',TO_DATE('1989-11-09','YYYY-MM-DD'),'F','Admistrative staff',20,3857483823,'559 E 10th st Tucson, AZ 85716',null);
+insert into Employee values (12345,'Jarryd Goodman',TO_DATE('1989-12-09','YYYY-MM-DD'),'M','Instructor',10,'5203952912','555 E 10th st Tucson, AZ 85716',333);
+insert into Employee values (23451,'Min Kwon',TO_DATE('1992-12-01','YYYY-MM-DD'),'M','Senior Instructor',10,'520354324','556 E 10th st Tucson, AZ 85716',222);
+insert into Employee values (34512,'Ryan Melzer',TO_DATE('1990-08-26','YYYY-MM-DD'),'M','Senior Instructor',20,'5205555555','557 E 10th st Tucson, AZ 85716',111);
+insert into Employee values (45123,'Christopher Stepanski',TO_DATE('1996-07-20','YYYY-MM-DD'),'F','Admistrative staff',10,'3949293493','558 E 10th st Tucson, AZ 85716',null);
+insert into Employee values (51234,'Shuo YAANNNGGGGGG',TO_DATE('1989-11-09','YYYY-MM-DD'),'F','Admistrative staff',20,'3857483823','559 E 10th st Tucson, AZ 85716',null);
 
 insert into Client values (1000,'Bill Matheson','M',TO_DATE('1989-12-09','YYYY-MM-DD'),'2341 E 2nd st Tucson, AZ 85716',12345);
 insert into Client values (2000,'Jennifer Creed','M',TO_DATE('1992-12-01','YYYY-MM-DD'),'2341 E 2nd st Tucson, AZ 85716',23451);

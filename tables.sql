@@ -5,7 +5,7 @@ create table Employee (
 	sex char(1),
 	jobTitle varchar2(100),
 	officeID integer,
-	phone integer,
+	phone char(10),
 	address varchar2(100),
 	carID integer,
 	primary key(employeeID)
