@@ -1,3 +1,4 @@
+<%@ page import="dbController.DatabaseController,java.util.*,java.lang.StringBuffer" %>
 <jsp:include page="header.jsp"></jsp:include>
 
 <body>
@@ -21,40 +22,59 @@
                         <span class="mui-caret"></span>
                     </button>
                     <ul class="mui-dropdown__menu" style="top: 42px;">
-                        <li><a href="index.jsp?tableName=Employee">Employees</a></li>
-                        <li><a href="index.jsp?tableName=Client">Clients</a></li>
-                        <li><a href="index.jsp?tableName=Office">Offices</a></li>
-                        <li><a href="index.jsp?tableName=Car">Cars</a></li>
-                        <li><a href="index.jsp?tableName=Lesson">Lessons</a></li>
-                        <li><a href="index.jsp?tableName=Test">Tests</a></li>
-                        <li><a href="index.jsp?tableName=Interview">Interviews</a></li>
+                        <li><a href="index.jsp?tableName=employee">Employees</a></li>
+                        <li><a href="index.jsp?tableName=client">Clients</a></li>
+                        <li><a href="index.jsp?tableName=office">Offices</a></li>
+                        <li><a href="index.jsp?tableName=car">Cars</a></li>
+                        <li><a href="index.jsp?tableName=lesson">Lessons</a></li>
+                        <li><a href="index.jsp?tableName=test">Tests</a></li>
+                        <li><a href="index.jsp?tableName=interview">Interviews</a></li>
                     </ul>
                 </div>
 				
 				<%
 					String table = request.getParameter("tableName");
-					out.write("Name of Table = " + table);
 					
+					
+					ArrayList<String[]> results = null;
 					DatabaseController dbcontroller = new DatabaseController();
+					dbcontroller.Open();
+
+					if(table == null){
+						results = dbcontroller.DisplayTable("employee");
+					}else{
+						results = dbcontroller.DisplayTable(table);
+					}
 					
-					
-					
+					if(results != null && results.size() > 0){
+						out.write("<table class='mui-table myTable'>");	
+						for(int i=0; i<results.size(); i++){
+							if(i==0){
+								out.write("<thead>");
+							}
+							out.write("<tr>");
+							String[] s = results.get(i);
+							for(int j=0; j<s.length; j++){
+								if(i==0){
+									out.write("<th>" + s[j] + "</th>");
+								}else{
+									out.write("<td>" + s[j] + "</td>");
+								}
+							}
+							if(i==0){
+								out.write("</thead>");
+							}
+							out.write("</tr>");
+						}
+						out.write("</table>");
+					}else{
+						out.write("<BR><BR>NULL<BR><BR>");
+					}
+				
+					dbcontroller.Close();
 				%>
 				
-
-                    <table class="mui-table myTable">
-                        <thead>
-                            <tr>
-                                <th>Car</th>
-                                <th>Bike</th>
-                                <th>Tire</th>
-                                <th>Poop</th>
-                                <th>Guns</th>
-                                <th>BIG ASS FREAK</th>
-                            </tr>
-                        </thead>
-                    </table>
-
+				
             </div>
         </div>
     </div>

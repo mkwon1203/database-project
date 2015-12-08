@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.util.*;
 
 /**
@@ -174,6 +175,13 @@ public class DatabaseController {
       return result;
     }
 
+	String[] header = new String[templen];
+	ResultSetMetaData rsmd = rs.getMetaData();
+	for(int i=0; i<templen; i++){
+		header[i] = rsmd.getColumnName(i+1);
+	}
+	result.add(header);	
+
     while (rs.next())
     {
       String[] temp = new String[templen]; // represents individual tuple in relation
@@ -187,7 +195,7 @@ public class DatabaseController {
           temp[3] = rs.getString("sex");
           temp[4] = rs.getString("jobTitle");
           temp[5] = rs.getInt("officeID") + "";
-          temp[6] = rs.getInt("phone") + "";
+          temp[6] = rs.getString("phone") + "";
           temp[7] = rs.getString("address");
           temp[8] = rs.getInt("carID") + "";
           break;
