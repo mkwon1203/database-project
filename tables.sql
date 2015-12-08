@@ -59,3 +59,11 @@ create table Interview (
 	dateAndTime timestamp,
 	primary key(employeeID, clientID)
 );
+
+grant all privileges on Employee to jarryd999, mkwon1203, chrisstep18;
+grant all privileges on Client to jarryd999, mkwon1203, chrisstep18;
+grant all privileges on Office to jarryd999, mkwon1203, chrisstep18;
+grant all privileges on Car to jarryd999, mkwon1203, chrisstep18;
+grant all privileges on Test to jarryd999, mkwon1203, chrisstep18;
+grant all privileges on Interview to jarryd999, mkwon1203, chrisstep18;
+grant all privileges on Lesson to jarryd999, mkwon1203, chrisstep18;
