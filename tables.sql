@@ -39,25 +39,25 @@ create table Car (
 create table Lesson (
 	employeeID integer not null,
 	clientID integer not null,
-	dateAndTime timestamp,
+	dateAndTime timestamp not null,
 	miles integer,
-	primary key(employeeID, clientID)
+	primary key(employeeID, clientID, dateAndTime)
 );
 
 create table Test (
 	employeeID integer not null,
 	clientID integer not null,
-	dateAndTime timestamp,
+	dateAndTime timestamp not null,
 	passed char(1),
 	reason_for_failure varchar2(100),
-	primary key(employeeID, clientID)
+	primary key(employeeID, clientID, dateAndTime)
 );
 
 create table Interview (
 	employeeID integer not null,
 	clientID integer not null,
-	dateAndTime timestamp,
-	primary key(employeeID, clientID)
+	dateAndTime timestamp not null,
+	primary key(employeeID, clientID, dateAndTime)
 );
 
 grant all privileges on Employee to jarryd999, mkwon1203, chrisstep18;
