@@ -98,7 +98,7 @@ public class DatabaseController {
     }
   }
 
-
+/*
   public Vector<String> FindAllEmployees() {
     String sql_query = "SELECT * FROM mccann.employee";
     try {
@@ -118,8 +118,8 @@ public class DatabaseController {
     }
     return null;
   }
-
-  public ArrayList<String[]> DisplayTable(String tableName)
+*/
+  public ArrayList<String[]> DisplayTable(String tableName) throws SQLException
   {
     String sql_query;
     int templen;
@@ -165,7 +165,7 @@ public class DatabaseController {
 
     try
     {
-      rs = statement.executeQuery(sql_query);
+      rs = statement_.executeQuery(sql_query);
       result = new ArrayList<String[]>();
     }
     catch (SQLException ex)
