@@ -19,7 +19,6 @@ create table Client (
 	address varchar2(100),
 	instID integer,
 	primary key(clientID)
-
 );
 
 create table Office (
@@ -28,7 +27,6 @@ create table Office (
 	city varchar2(100),
 	address varchar2(100),
 	primary key(officeID)
-
 );
 
 create table Car (
@@ -53,7 +51,6 @@ create table Test (
 	passed char(1),
 	reason_for_failure varchar2(100),
 	primary key(employeeID, clientID)
-
 );
 
 create table Interview (
