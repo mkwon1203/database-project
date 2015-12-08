@@ -38,9 +38,9 @@ public class DatabaseController {
 
   public DatabaseController() {
     // your cs login name
-    username = "mkwon1203";
+    username = "rdmelzer";
     // your Oracle password, NNNN is the last four digits of your CSID
-    password = "password";
+    password = "a1767";
     connect_string_ = "jdbc:oracle:thin:@aloe.cs.arizona.edu:1521:oracle";
   }
 
