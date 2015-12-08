@@ -1,0 +1,6 @@
+Queries:
+a) The names and the telephone numbers of the Managers of each office.
+d) The total number of staff at each office. 
+g) The details of interviews conducted by a given Instructor.
+j) The reg number of cars that have had no faults found.
+o) The number of administrative staff located at each office.
