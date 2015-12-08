@@ -1,0 +1,15 @@
+.topbar{
+    box-shadow: 0 2px 5px rgba(0,0,0,.26);
+}
+
+.centerTitle{
+    padding: 10px 0;
+}
+
+#main-wrapper{
+    padding-top: 20px;
+}
+
+.myDropdown{
+    padding-bottom: 15px;
+}
