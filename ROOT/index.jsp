@@ -14,7 +14,28 @@
         <div class="mui-col-sm-10 mui-col-sm-offset-1">
             <!--Panel for info display-->
             <div class="mui-panel">
-
+				<%
+					String table = request.getParameter("tableName");
+					String query = request.getParameter("query");
+					String tableParams = "";
+					String queryParams = "";
+					String insertParams = "";
+					if(table == null){
+						insertParams += "tableName=employee";
+						queryParams = "tableName=employee&query=";
+					}else{
+						insertParams += "tableName=" + table;
+						queryParams = "tableName=" + table + "&query=";
+					}
+					if(query == null){
+						insertParams += "&query=1";
+						tableParams = "query=1&tableName=";
+					}else{
+						insertParams += "&query=" + query;
+						tableParams = "query=" + query + "&tableName=";
+					}
+					
+				%>
                 <!--dropdown to select table to display-->
                 <div class="mui-dropdown myDropdown">
                     <button class="mui-btn mui-btn--primary" data-mui-toggle="dropdown">
@@ -22,18 +43,17 @@
                         <span class="mui-caret"></span>
                     </button>
                     <ul class="mui-dropdown__menu" style="top: 42px;">
-                        <li><a href="index.jsp?tableName=employee">Employees</a></li>
-                        <li><a href="index.jsp?tableName=client">Clients</a></li>
-                        <li><a href="index.jsp?tableName=office">Offices</a></li>
-                        <li><a href="index.jsp?tableName=car">Cars</a></li>
-                        <li><a href="index.jsp?tableName=lesson">Lessons</a></li>
-                        <li><a href="index.jsp?tableName=test">Tests</a></li>
-                        <li><a href="index.jsp?tableName=interview">Interviews</a></li>
+                        <li><a href="index.jsp?<%=tableParams%>employee">Employees</a></li>
+                        <li><a href="index.jsp?<%=tableParams%>client">Clients</a></li>
+                        <li><a href="index.jsp?<%=tableParams%>office">Offices</a></li>
+                        <li><a href="index.jsp?<%=tableParams%>car">Cars</a></li>
+                        <li><a href="index.jsp?<%=tableParams%>lesson">Lessons</a></li>
+                        <li><a href="index.jsp?<%=tableParams%>test">Tests</a></li>
+                        <li><a href="index.jsp?<%=tableParams%>interview">Interviews</a></li>
                     </ul>
                 </div>
 				
 				<%
-					String table = request.getParameter("tableName");					
 					ArrayList<String[]> results = null;
 					DatabaseController dbcontroller = new DatabaseController();
 					dbcontroller.Open();
@@ -66,7 +86,13 @@
 							}
 							out.write("</tr>");
 						}
-						out.write("</table>");
+						out.write("<tr><form action='index.jsp?" + insertParams + "' method='POST'>");
+						String[] headers = results.get(0);
+						for(int y=0; y<headers.length; y++){
+							out.write("<td><input type='text-field' name='" + headers[y] +"'></td>");
+						}
+						out.write("</tr></table>");
+						out.write("<input type='submit' value='Insert'></form>");
 					}else{
 						out.write("<BR><BR>NULL<BR><BR>");
 					}
