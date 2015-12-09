@@ -1,3 +1,4 @@
+
 package dbController;
 
 import java.sql.Connection;
@@ -377,7 +378,7 @@ public class DatabaseController {
    */
   
 //a) The names and the telephone numbers of the Managers of each office.
-	public ArrayList<String[]> queryA() {
+	public ArrayList<String[]> query1() {
 		
 		String sql_query = "select name, phone from rdmelzer.employee where employeeID in (select mgrID from rdmelzer.office)";
     	int templen = 2;
@@ -411,7 +412,7 @@ public class DatabaseController {
 	}
 
 	//d) The total number of staff at each office. 
-	public ArrayList<String[]> queryD() {
+	public ArrayList<String[]> query2() {
 		
 		String sql_query = "select count(*), officeID from rdmelzer.employee group by officeID";
     	int templen = 2;
@@ -445,7 +446,7 @@ public class DatabaseController {
 	}
 
 	//g) The details of interviews conducted by a given Instructor.
-	public ArrayList<String[]> queryG(int instructorID) {
+	public ArrayList<String[]> query3(int instructorID) {
 		
 		String sql_query = "select * from rdmelzer.interview where interview.employeeID = " + instructorID;
     	int templen = 3;
@@ -480,7 +481,7 @@ public class DatabaseController {
 	}
 
 	//j) The reg number of cars that have had no faults found.	
-	public ArrayList<String[]> queryJ() {
+	public ArrayList<String[]> query4() {
 		
 		String sql_query = "select regNum from rdmelzer.car where faulted='N'"
     	int templen = 1;
@@ -513,7 +514,7 @@ public class DatabaseController {
 	}
 	
 	//o) The number of administrative staff located at each office.
-	public ArrayList<String[]> queryO() {
+	public ArrayList<String[]> query5() {
 
 		String sql_query = "select count(*), officeID from rdmelzer.employee where jobTitle='Admistrative staff' group by officeID";
     	int templen = 2;
