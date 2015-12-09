@@ -286,30 +286,32 @@ public class DatabaseController {
   public boolean Remove(String tableName, String[][] attrValues){
     StringBuffer query = new StringBuffer();
     query.append("DELETE FROM ");
+    query.append(username);
+    query.append(".");
     query.append(tableName);
     query.append(" WHERE ");
 
     //loop through the attributes and append them to the WHERE clause
-    for (int i = 0; i < attrValues.len; i++){
-      query.append(attrValues[i]);
-      query.append(" = '");
+    for (int i = 0; i < attrValues.length; i++){
       query.append(attrValues[i][0]);
-      query.append("' ");
+      query.append("='");
+      query.append(attrValues[i][1]);
+      query.append("'");
 
       //if not at the last attribue, add an AND clause
-      if (i+1 < attrValues.len){
+      if (i+1 < attrValues.length){
         query.append(" AND ");
       }
+    }
 
-      //try to execute the query and return true on success
-      //print stack trace and return false if unsuccessful
-      try{
-        statement_.executeQuery(query.toString());
-        return true;
-      } catch (SQLException sqlex){
-        sqlex.printStackTrace();
-        return false;
-      }
+    //try to execute the query and return true on success
+    //print stack trace and return false if unsuccessful
+    try{
+      statement_.executeQuery(query.toString());
+      return true;
+    } catch (SQLException sqlex){
+      sqlex.printStackTrace();
+      return false;
     }
   }
 
@@ -326,7 +328,6 @@ public class DatabaseController {
   * @return: Return True if successful, False otherwise
   **/
   public boolean Update(String[][] attrValues, String[][] oldPrimaryKeys){
-	  String tableName = username + ".car" // only updating car table
 	StringBuffer query = new StringBuffer();
     query.append("UPDATE ");
     query.append(tableName);
