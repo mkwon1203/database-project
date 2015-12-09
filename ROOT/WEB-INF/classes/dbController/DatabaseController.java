@@ -299,7 +299,7 @@ public class DatabaseController {
       query.append("'");
 
       //if not at the last attribue, add an AND clause
-      if (i+1 < attrValues.length){
+      if (i != attrValues.length-1){
         query.append(" AND ");
       }
     }
@@ -330,32 +330,34 @@ public class DatabaseController {
   public boolean Update(String[][] attrValues, String[][] oldPrimaryKeys){
 	StringBuffer query = new StringBuffer();
     query.append("UPDATE ");
-    query.append(tableName);
+    query.append(username);
+    query.append(".car SET ");
+    
+    //loop through the new attrValues and set them
+    for (int i = 0; i < attrValues.length; i++){
+      query.append(attrValues[i][0]);
+      query.append("='");
+      query.append(attrValues[i][1]);
+      query.append("'");
+
+      //if not on the last iteration of the loop, add a comma seperator
+      if (i != attrValues.length-1){
+        query.append(", ");
+      }
+    }
+    
     query.append(" WHERE ");
 
     //loop through and identify the row by its old data
-    for (int i = 0; i < oldPrimaryKeys.len; i++){
-      query.append(oldPrimaryKeys[i])
-      query.append(" = '");
-      query.append(oldPrimaryKeys[i][0]);
+    for (int i = 0; i < oldPrimaryKeys.length; i++){
+      query.append(oldPrimaryKeys[i][0])
+      query.append("='");
+      query.append(oldPrimaryKeys[i][1]);
+      query.append("'");
 
       //if not at the last attribute, add an AND clause
-      if (i+1 < oldPrimaryKeys.len){
+      if (i != oldPrimaryKeys.length-1){
         query.append(" AND ");
-      }
-    }
-
-    query.append(" SET ");
-
-    //loop through the new attrValues and set them
-    for (int i = 0; i < attrValues.len; i++){
-      query.append(attrValues[i]);
-      query.append(" = ");
-      query.append(attrValues[i][0]);
-
-      //if not on the last iteration of the loop, add a comma seperator
-      if (i+1 < attrValues.len){
-        query.append(", ");
       }
     }
 
@@ -368,7 +370,180 @@ public class DatabaseController {
       sqlex.printStackTrace();
       return false;
     }
-
-
   }
+  
+  /*
+   * BELOW ARE QUERIES
+   */
+  
+//a) The names and the telephone numbers of the Managers of each office.
+	private static ArrayList<String[]> queryA() {
+		
+		String sql_query = "select name, phone from rdmelzer.employee where employeeID in (select mgrID from rdmelzer.office)";
+    	int templen = 2;
+   		ResultSet rs = null;
+    	ArrayList<String[]> result = null;
+
+    	try {
+			rs = statement_.executeQuery(sql_query);
+     		result = new ArrayList<String[]>();
+  	  	}
+    	catch (SQLException ex) {
+      		ex.printStackTrace();
+      		return result;
+   		 }
+
+		String[] header = new String[templen];
+		ResultSetMetaData rsmd = rs.getMetaData();
+		for(int i=0; i<templen; i++) {
+			header[i] = rsmd.getColumnName(i+1);
+		}
+		result.add(header);	
+
+    	while (rs.next()) {
+        	String[] temp = new String[templen]; // represents individual tuple in relation
+        	temp[0] = rs.getString("name");
+        	temp[1] = rs.getString("phone");
+        	result.add(temp);
+
+     	} // end of rs.next
+    	return result;
+	}
+
+	//d) The total number of staff at each office. 
+	private static ArrayList<String[]> queryD() {
+		
+		String sql_query = "select count(*), officeID from rdmelzer.employee group by officeID";
+    	int templen = 2;
+   		ResultSet rs = null;
+    	ArrayList<String[]> result = null;
+
+    	try {
+			rs = statement_.executeQuery(sql_query);
+     		result = new ArrayList<String[]>();
+  	  	}
+    	catch (SQLException ex) {
+      		ex.printStackTrace();
+      		return result;
+   		}
+
+		String[] header = new String[templen];
+		ResultSetMetaData rsmd = rs.getMetaData();
+		for(int i=0; i<templen; i++) {
+			header[i] = rsmd.getColumnName(i+1);
+		}
+		result.add(header);	
+
+    	while (rs.next()) {
+        	String[] temp = new String[templen]; // represents individual tuple in relation
+        	temp[0] = rs.getInt(1);
+        	temp[1] = rs.getInt("officeID");
+        	result.add(temp);
+
+     	} // end of rs.next
+    	return result;
+	}
+
+	//g) The details of interviews conducted by a given Instructor.
+	private static ArrayList<String[]> queryG(int instructorID) {
+		
+		String sql_query = "select * from rdmelzer.interview where interview.employeeID = " + instructorID;
+    	int templen = 3;
+   		ResultSet rs = null;
+    	ArrayList<String[]> result = null;
+
+    	try {
+			rs = statement_.executeQuery(sql_query);
+     		result = new ArrayList<String[]>();
+  	  	}
+    	catch (SQLException ex) {
+      		ex.printStackTrace();
+      		return result;
+   		}
+
+		String[] header = new String[templen];
+		ResultSetMetaData rsmd = rs.getMetaData();
+		for(int i=0; i<templen; i++) {
+			header[i] = rsmd.getColumnName(i+1);
+		}
+		result.add(header);	
+
+    	while (rs.next()) {
+        	String[] temp = new String[templen]; // represents individual tuple in relation
+        	temp[0] = rs.getInt(1);
+        	temp[1] = rs.getInt(2);
+        	temp[2] = rs.getTimestamp(3).toString();
+        	result.add(temp);
+
+     	} // end of rs.next
+    	return result;
+	}
+
+	//j) The reg number of cars that have had no faults found.	
+	private static ArrayList<String[]> queryJ() {
+		
+		String sql_query = "select regNum from rdmelzer.car where faulted='N'"
+    	int templen = 1;
+   		ResultSet rs = null;
+    	ArrayList<String[]> result = null;
+
+    	try {
+			rs = statement_.executeQuery(sql_query);
+     		result = new ArrayList<String[]>();
+  	  	}
+    	catch (SQLException ex) {
+      		ex.printStackTrace();
+      		return result;
+   		}
+
+		String[] header = new String[templen];
+		ResultSetMetaData rsmd = rs.getMetaData();
+		for(int i=0; i<templen; i++) {
+			header[i] = rsmd.getColumnName(i+1);
+		}
+		result.add(header);	
+
+    	while (rs.next()) {
+        	String[] temp = new String[templen]; // represents individual tuple in relation
+        	temp[0] = rs.getInt(1);
+        	result.add(temp);
+
+     	} // end of rs.next
+    	return result;
+	}
+	
+	//o) The number of administrative staff located at each office.
+	private static ArrayList<String[]> queryO() {
+
+		String sql_query = "select count(*), officeID from rdmelzer.employee where jobTitle='Admistrative staff' group by officeID";
+    	int templen = 2;
+   		ResultSet rs = null;
+    	ArrayList<String[]> result = null;
+
+    	try {
+			rs = statement_.executeQuery(sql_query);
+     		result = new ArrayList<String[]>();
+  	  	}
+    	catch (SQLException ex) {
+      		ex.printStackTrace();
+      		return result;
+   		}
+
+		String[] header = new String[templen];
+		ResultSetMetaData rsmd = rs.getMetaData();
+		for(int i=0; i<templen; i++) {
+			header[i] = rsmd.getColumnName(i+1);
+		}
+		result.add(header);	
+
+    	while (rs.next()) {
+        	String[] temp = new String[templen]; // represents individual tuple in relation
+        	temp[0] = rs.getInt(1);
+        	temp[1] = rs.getInt("officeID");
+        	result.add(temp);
+
+     	} // end of rs.next
+    	return result;		
+
+	}
 }
