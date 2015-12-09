@@ -17,22 +17,18 @@
 				<%
 					String table = request.getParameter("tableName");
 					String query = request.getParameter("query");
-					String tableParams = "";
-					String queryParams = "";
+					String tableSelection = "";
+					String querySelection = "";
 					String insertParams = "";
 					if(table == null){
-						insertParams += "tableName=employee";
-						queryParams = "tableName=employee&query=";
+						tableSelection += "tableName=employee";
 					}else{
-						insertParams += "tableName=" + table;
-						queryParams = "tableName=" + table + "&query=";
+						tableSelection += "tableName=" + table;
 					}
 					if(query == null){
-						insertParams += "&query=1";
-						tableParams = "query=1&tableName=";
+						querySelection += "&query=1";
 					}else{
-						insertParams += "&query=" + query;
-						tableParams = "query=" + query + "&tableName=";
+						querySelection += "&query=" + query;
 					}
 					
 				%>
@@ -43,13 +39,13 @@
                         <span class="mui-caret"></span>
                     </button>
                     <ul class="mui-dropdown__menu" style="top: 42px;">
-                        <li><a href="index.jsp?<%=tableParams%>employee">Employees</a></li>
-                        <li><a href="index.jsp?<%=tableParams%>client">Clients</a></li>
-                        <li><a href="index.jsp?<%=tableParams%>office">Offices</a></li>
-                        <li><a href="index.jsp?<%=tableParams%>car">Cars</a></li>
-                        <li><a href="index.jsp?<%=tableParams%>lesson">Lessons</a></li>
-                        <li><a href="index.jsp?<%=tableParams%>test">Tests</a></li>
-                        <li><a href="index.jsp?<%=tableParams%>interview">Interviews</a></li>
+                        <li><a href="index.jsp?tableName=employee&<%=querySelection%>">Employees</a></li>
+                        <li><a href="index.jsp?tableName=client&<%=querySelection%>">Clients</a></li>
+                        <li><a href="index.jsp?tableName=office&<%=querySelection%>">Offices</a></li>
+                        <li><a href="index.jsp?tableName=car&<%=querySelection%>">Cars</a></li>
+                        <li><a href="index.jsp?tableName=lesson&<%=querySelection%>">Lessons</a></li>
+                        <li><a href="index.jsp?tableName=test&<%=querySelection%>">Tests</a></li>
+                        <li><a href="index.jsp?tableName=interview&<%=querySelection%>">Interviews</a></li>
                     </ul>
                 </div>
 				
@@ -111,11 +107,11 @@
                         <span class="mui-caret"></span>
                     </button>
                     <ul class="mui-dropdown__menu" style="top: 42px;">
-                        <li><a href="index.jsp?tableName=Employee">Query #1</a></li>
-                        <li><a href="index.jsp?tableName=Client">Query #2</a></li>
-                        <li><a href="index.jsp?tableName=Office">Query #3</a></li>
-                        <li><a href="index.jsp?tableName=Car">Query #4</a></li>
-                        <li><a href="index.jsp?tableName=Lesson">Query #5</a></li>
+                        <li><a href="index.jsp?<%=tableSelection%>&query=1">Query #1</a></li>
+                        <li><a href="index.jsp?<%=tableSelection%>&query=2">Query #2</a></li>
+                        <li><a href="index.jsp?<%=tableSelection%>&query=3">Query #3</a></li>
+                        <li><a href="index.jsp?<%=tableSelection%>&query=4">Query #4</a></li>
+                        <li><a href="index.jsp?<%=tableSelection%>&query=5">Query #5</a></li>
                     </ul>
                 </div>
             </div>
