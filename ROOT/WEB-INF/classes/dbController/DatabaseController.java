@@ -105,7 +105,7 @@ public class DatabaseController {
     int templen;
     ResultSet rs = null;
     ArrayList<String[]> result = null;
-    String user = "rdmelzer"; // change if need be
+    String user = username; // change if need be
 
     switch (tableName)
     {
@@ -225,12 +225,6 @@ public class DatabaseController {
 
     return result;
   }
-  
-  public boolean InsertEmployee(String employeeID, String name, String DOB, String sex, String jobTitle, String officeID, String phone, String address, String cardID)
-  {
-
-  }
-
 
   /**
   * Function: Insert(tableName, attrValues)
@@ -248,32 +242,33 @@ public class DatabaseController {
   public boolean Insert(String tableName, String[] attrValues){
     StringBuffer query = new StringBuffer();
     query.append("INSERT INTO ");
+    query.append(username);
+    query.append(".");
     query.append(tableName);
-    query.append(" (");
+    query.append(" VALUES (");
 
     //loop through the array of attributes and add them to the query string
-    for (int i = 0; i < attrValues.len; i++){
+    for (int i = 0; i < attrValues.length; i++){
       query.append("'");
       query.append(attrValues[i]);
       query.append("'");
 
       //if not at the last attribute, add a comma seperator
-      if (i+1 < attrValues.len){
-        query.append(",");
+      if (i != attrValues.length-1){
+        query.append(", ");
       }
 
       query.append(")");
-
-      //try to execute the query and return true on success
-      //print stack trace and return false if unsuccessful
-      try{
-        ResultSet rs = statement_.executeQuery(query.toString());
-        return true;
-      } catch (SQLException sqlex){
-        sqlex.printStackTrace;
-        return false;
-      }
-      //execute the
+    }
+    
+    //try to execute the query and return true on success
+    //print stack trace and return false if unsuccessful
+    try{
+      ResultSet rs = statement_.executeQuery(query.toString());
+      return true;
+    } catch (SQLException sqlex){
+      sqlex.printStackTrace;
+      return false;
     }
   }
 
@@ -330,8 +325,9 @@ public class DatabaseController {
   *
   * @return: Return True if successful, False otherwise
   **/
-  public boolean Update(String tableName, String[][] attrValues, String[][] oldPrimaryKeys){
-        StringBuffer query = new StringBuffer();
+  public boolean Update(String[][] attrValues, String[][] oldPrimaryKeys){
+	  String tableName = username + ".car" // only updating car table
+	StringBuffer query = new StringBuffer();
     query.append("UPDATE ");
     query.append(tableName);
     query.append(" WHERE ");
