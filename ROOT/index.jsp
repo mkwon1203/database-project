@@ -131,22 +131,24 @@
 					query = "1";
 				}
 
+				query = Integer.parseInt(query);
+
 				//switch on the query to have the java class execute the right special query
 				switch (query){
-					case "1":
-						results = dbConnection.query1();
+					case 1:
+						results = dbcontroller.query1();
 						break;
-					case "2":
-						results = dbConnection.query2();
+					case 2:
+						results = dbcontroller.query2();
 						break;
-					case "3":
-						results = dbConnection.query3();
+					case 3:
+						results = dbcontroller.query3();
 						break;
-					case "4":
-						results = dbConnection.query4();
+					case 4:
+						results = dbcontroller.query4();
 						break;
-					case "5":
-						results = dbConnection.query5();
+					case 5:
+						results = dbcontroller.query5();
 						break;
 				}
 
