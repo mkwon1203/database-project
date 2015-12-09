@@ -1,4 +1,7 @@
-`<%@ page import="dbController.DatabaseController,java.util.*,java.lang.StringBuffer" %>
+`<%@ page import="dbController.DatabaseController,java.util.*,java.lang.StringBuffer" 
+
+	
+%>
 <jsp:include page="header.jsp"></jsp:include>
 
 <body>
@@ -26,9 +29,9 @@
 						tableSelection += "tableName=" + table;
 					}
 					if(query == null){
-						querySelection += "&query=1";
+						querySelection += "query=1";
 					}else{
-						querySelection += "&query=" + query;
+						querySelection += "query=" + query;
 					}
 					
 				%>
@@ -57,19 +60,26 @@
 					if(table == null){
 						table = "employee";
 					}
+
+					//Write out a header for the table with a capitolized name
 					out.write("<h1 style='text-align:center;font-size:50px;padding-bottom:15px'>" + table.substring(0,1).toUpperCase() + table.substring(1) + "s</h1>");
+
+					//Call display table from the java class
 					String tName = table.substring(0,1).toUpperCase() + table.substring(1);
 					results = dbcontroller.DisplayTable(table);
 					
 					
+					//if there are results
 					if(results != null && results.size() > 0){
 						out.write("<table class='mui-table myTable'>");	
+						//loop through the loop of results
 						for(int i=0; i<results.size(); i++){
 							if(i==0){
 								out.write("<thead>");
 							}
 							out.write("<tr>");
 							String[] s = results.get(i);
+							//loop through all the attribute values and print table cells
 							for(int j=0; j<s.length; j++){
 								if(i==0){
 									out.write("<th>" + s[j] + "</th>");
@@ -114,6 +124,66 @@
                         <li><a href="index.jsp?<%=tableSelection%>&query=5">Query #5</a></li>
                     </ul>
                 </div>
+
+			<% 
+				//check that query is set
+				if (query == NULL){
+					query = "1";
+				}
+
+				//switch on the query to have the java class execute the right special query
+				switch (query){
+					case "1":
+						results = dbConnection.query1();
+						break;
+					case "2":
+						results = dbConnection.query2();
+						break;
+					case "3":
+						results = dbConnection.query3();
+						break;
+					case "4":
+						results = dbConnection.query4();
+						break;
+					case "5":
+						results = dbConnection.query5();
+						break;
+				}
+
+				//print a header for the table
+
+				//print the query results
+				//if there are results
+					if(results != null && results.size() > 0){
+						out.write("<table class='mui-table myTable'>");	
+						//loop through the loop of results
+						for(int i=0; i<results.size(); i++){
+							if(i==0){
+								out.write("<thead>");
+							}
+							out.write("<tr>");
+							String[] s = results.get(i);
+							//loop through all the attribute values and print table cells
+							for(int j=0; j<s.length; j++){
+								if(i==0){
+									out.write("<th>" + s[j] + "</th>");
+								}else{
+									out.write("<td>" + s[j] + "</td>");
+								}
+							}
+							if(i==0){
+								out.write("</thead>");
+							}
+							out.write("</tr>");
+						}
+						
+						out.write("</tr></table>");
+						
+					}else{
+						out.write("<BR><BR>NULL<BR><BR>");
+					}
+			%>
+
             </div>
         </div>
     </div>
