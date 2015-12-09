@@ -131,10 +131,10 @@
 					query = "1";
 				}
 
-				query = Integer.parseInt(query);
+				int queryInt = Integer.parseInt(query);
 
 				//switch on the query to have the java class execute the right special query
-				switch (query){
+				switch (queryInt){
 					case 1:
 						results = dbcontroller.query1();
 						break;
