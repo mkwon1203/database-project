@@ -99,27 +99,6 @@ public class DatabaseController {
     }
   }
 
-/*
-  public Vector<String> FindAllEmployees() {
-    String sql_query = "SELECT * FROM mccann.employee";
-    try {
-      ResultSet rs  = statement_.executeQuery(sql_query);
-      Vector<String> result_employees = new Vector<String>();
-      while (rs.next()) {
-         String temp_record = rs.getString("fname") + "##" + rs.getString("minit") +
-             "##" + rs.getString("lname") + "##" + rs.getString("ssn") + "##" +
-             rs.getString("bdate") + "##" + rs.getString("address") + "##" +
-	     rs.getString("sex") + "##" + rs.getString("salary") +
-	     "##" + rs.getString("superssn") + "##" + rs.getString("dno");
-        result_employees.add(temp_record);
-      }
-      return result_employees;
-    } catch (SQLException sqlex) {
-      sqlex.printStackTrace();
-    }
-    return null;
-  }
-*/
   public ArrayList<String[]> DisplayTable(String tableName) throws SQLException
   {
     String sql_query;
