@@ -1,4 +1,4 @@
-<%@ page import="dbController.DatabaseController,java.util.*,java.lang.StringBuffer" %>
+`<%@ page import="dbController.DatabaseController,java.util.*,java.lang.StringBuffer" %>
 <jsp:include page="header.jsp"></jsp:include>
 
 <body>
@@ -101,6 +101,23 @@
 				%>
 				
 				
+            </div>
+            <div class="mui-panel">
+
+                <!--dropdown to select table to display-->
+                <div class="mui-dropdown myDropdown">
+                    <button class="mui-btn mui-btn--primary" data-mui-toggle="dropdown">
+                        Select A Query
+                        <span class="mui-caret"></span>
+                    </button>
+                    <ul class="mui-dropdown__menu" style="top: 42px;">
+                        <li><a href="index.jsp?tableName=Employee">Query #1</a></li>
+                        <li><a href="index.jsp?tableName=Client">Query #2</a></li>
+                        <li><a href="index.jsp?tableName=Office">Query #3</a></li>
+                        <li><a href="index.jsp?tableName=Car">Query #4</a></li>
+                        <li><a href="index.jsp?tableName=Lesson">Query #5</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
