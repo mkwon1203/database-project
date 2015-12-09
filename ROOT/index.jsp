@@ -127,7 +127,7 @@
 
 			<% 
 				//check that query is set
-				if (query == NULL){
+				if (query == null){
 					query = "1";
 				}
 
