@@ -1,7 +1,5 @@
-`<%@ page import="dbController.DatabaseController,java.util.*,java.lang.StringBuffer" 
+<%@ page import="dbController.DatabaseController,java.util.*,java.lang.StringBuffer"%>
 
-	
-%>
 <jsp:include page="header.jsp"></jsp:include>
 
 <body>
@@ -33,7 +31,7 @@
 					}else{
 						querySelection += "query=" + query;
 					}
-
+					insertParams = tableSelection+"&"+querySelection;
 					
 				%>
                 <!--dropdown to select table to display-->
@@ -93,10 +91,12 @@
 							}
 							out.write("</tr>");
 						}
-						out.write("<tr><form action='index.jsp?" + insertParams + "' method='POST'>");
+						out.write("<tr><form action='insert.jsp' method='POST'>");
+						out.write("<input type='text-field' name='link' style='display:none' value='index.jsp?" + insertParams+ "'>");
+						out.write("<input type='text-field' name='table' style='display:none' value='" + table+ "'>");
 						String[] headers = results.get(0);
 						for(int y=0; y<headers.length; y++){
-							out.write("<td><input type='text-field' name='" + headers[y] +"'></td>");
+							out.write("<td><input type='text-field' name='" + headers[y] +"' required></td>");
 						}
 						out.write("</tr></table>");
 						out.write("<input type='submit' value='Insert'></form>");
@@ -135,7 +135,7 @@
 				dbcontroller.Open();
 				int queryInt = Integer.parseInt(query);
 
-				switch on the query to have the java class execute the right special query
+				// switch on the query to have the java class execute the right special query
 				switch (queryInt){
 					case 1:
 						results = dbcontroller.query1();
