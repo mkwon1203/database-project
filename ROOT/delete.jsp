@@ -19,8 +19,8 @@
 			int keyCounter = 0;
 			String primaryKey1, primaryKey2, primaryKey3;
 
-			java.util.Enumeration params = request.getParameterNames());
-		    while(params.hasMoreElements())) {
+			java.util.Enumeration params = request.getParameterNames();
+		    while(params.hasMoreElements()) {
 		        String paramName = (String) params.nextElement();
 
 		        if (paramName == "tableName"){
