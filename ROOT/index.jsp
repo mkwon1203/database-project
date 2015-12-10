@@ -119,8 +119,7 @@
 									primaryKey2value = s[1];
 									primaryKey3value = s[2];
 
-									deleteParms += "&primaryKey2=" + primaryKey2 + "&primaryKey2value=" + primaryKey2value +
-													"&primaryKey3=" + primaryKey3 + "&primaryKey3value=" + primaryKey3value;
+									deleteParms += "&primaryKey2=" + primaryKey2 + "&primaryKey2value=" + primaryKey2value + "&primaryKey3=" + primaryKey3 + "&primaryKey3value=" + primaryKey3value;
 								}
 							}
 							//loop through all the attribute values and print table cells
