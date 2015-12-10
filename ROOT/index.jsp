@@ -143,7 +143,7 @@
 						results = dbcontroller.query2();
 						break;
 					case 3:
-						results = dbcontroller.query3();
+						results = dbcontroller.query3(2);
 						break;
 					case 4:
 						results = dbcontroller.query4();
