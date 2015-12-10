@@ -19,30 +19,18 @@
 			int keyCounter = 0;
 			String primaryKey1 = "", primaryKey2 = "", primaryKey3 = "";
 
-			java.util.Enumeration params = request.getParameterNames();
-		    while(params.hasMoreElements()) {
-		        String paramName = (String) params.nextElement();
+			//retrive all GET parameters
+			tableName = request.getParameter(paramName);
+		    primaryKey1 = request.getParameter(paramName);
+		    primaryKey2 = request.getParameter(paramName);
+		    primaryKey3 = request.getParameter(paramName);
+	    	link = "index.jsp?tableName=" + tableName + "&query=" + request.getParameter("query");
 
-		        if (paramName == "tableName"){
-		        	tableName = request.getParameter(paramName);
-		        }
-		        if (paramName == "primaryKey1"){
-		        	primaryKey1 = request.getParameter(paramName);
-		        }
-		        else if (paramName == "primaryKey2")
-		        	primaryKey2 = request.getParameter(paramName);
-		        else if (paramName == "primaryKey3")
-		        	primaryKey3 = request.getParameter(paramName);
+	    	compositeKeys[0] = request.getParameter("primaryKey1value");
+	    	compositeKeys[1] = request.getParameter("primaryKey2value");
+	    	compositeKeys[2] = request.getParameter("primaryKey3value");
 
-		        else if (paramName == "query")
-		        	link = "index.jsp?tableName=" + request.getParameter("tableName") + "&query=" + request.getParameter("query");
-
-		        //otherwise it's a primary key value
-		        else{
-		        	compositeKeys[keyCounter] = request.getParameter(paramName);
-		        	keyCounter++;
-		        }
-		    }
+		    
 
 		    String[][] deleteParameters = new String[5][5];
 		    deleteParameters[0][0] = primaryKey1;
