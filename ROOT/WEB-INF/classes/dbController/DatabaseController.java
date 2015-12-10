@@ -144,11 +144,15 @@ public class DatabaseController
 	
 	/**
 	 * Function: DisplayTable(tableName) 
-	 * Description: 
+	 * Description: This function will query for the contents of table with the
+	 * given tablename. Then, it will parse through the result of the query and build 
+	 * an ArrayList object containing String arrays, where each array corresponds to
+	 * an individual tuple in the result table. The ArrayList object is then returned.
 	 * 
-	 * @input: tableName (String) - the name of table 
+	 * @input: tableName (String) - the name of table whose contents need to be returned
 	 *
-	 * @return: Return 
+	 * @return: Return ArrayList containing contents of table where each element is a
+	 * String array containing fields of a given tuple
 	 **/
 	public ArrayList<String[]> DisplayTable(String tableName)
 			throws SQLException
@@ -388,13 +392,27 @@ public class DatabaseController
 			if (attrValues[i][0] == null)
 				break;
 			
-			query.append(attrValues[i][0]);
-			query.append("='");
-			query.append(attrValues[i][1]);
-			query.append("'");
+			// converting timestamp into SQL timestamp
+			if (i == 2)
+			{
+				query.append(attrValues[i][0]);
+				query.append("=");
+				query.append("TO_TIMESTAMP('");
+				String s = attrValues[i][1];
+				s = s.substring(0, s.length() - 2); // chop off the .00 second
+				query.append(s);
+				query.append("', 'YYYY-MM-DD HH24:MI:SS')");
+			}
+			else
+			{
+				query.append(attrValues[i][0]);
+				query.append("='");
+				query.append(attrValues[i][1]);
+				query.append("'");
+			}
 
 			// if not at the last attribue, add an AND
-			if (i != attrValues.length - 1)
+			if (i != attrValues.length - 1 && attrValues[2][0] != null)
 			{
 				query.append(" AND ");
 			}
@@ -415,21 +433,15 @@ public class DatabaseController
 	}
 
 	/**
-	 * Function: Update(tableName, attrValues, oldPrimaryKeys) Description:
-	 * Function will modify a row from the given table. Function assumes valid
-	 * name input as tableName and attrValues, and that the table exists. After
-	 * the function is run, the specified row should be modified to reflect
-	 * specified data.
+	 * Function: Update(regNum) Description:
+	 * Function will modify a row with the given regNum from the car relation.
+	 * The car's faulted value will be flipped. I.e., Y -> N and vice versa.
 	 * 
-	 * @input: tableName (String) - the name of the table to remove the row from
-	 *         attrValues (String[][]) - the name of the attribute and the
-	 *         corresponding value to update row with oldPrimaryKeys
-	 *         (String[][]) - the name of the PK's with old values to identify
-	 *         row to update
+	 * @input: regNum (String) - regNum of the car whose faulted value is to be updated
 	 *
 	 * @return: Return True if successful, False otherwise
 	 **/
-	public boolean Update(String regNum, String faulted)
+	public boolean Update(String regNum) throws SQLException
 	{
 		// update query to execute
 		StringBuffer query = new StringBuffer();
@@ -438,6 +450,25 @@ public class DatabaseController
 		query.append(username);
 		// we only update the car table
 		query.append(".car SET ");
+		
+		// find the car's faulted value
+		ResultSet rs = null; // storing the result of sql query
+		String subquery = "select * from rdmelzer.car where regNum='";
+		subquery += regNum;
+		subquery += "'";
+		// try to execute the query and return true on success
+		// print stack trace and return false if unsuccessful
+		try
+		{
+			rs = statement_.executeQuery(subquery);
+		}
+		catch (SQLException sqlex)
+		{
+			sqlex.printStackTrace();
+			return false;
+		}
+		rs.next();
+		String faulted = rs.getString(3);
 
 		// the new fault value to set to
 		String newFault = "";
@@ -468,6 +499,7 @@ public class DatabaseController
 		try
 		{
 			statement_.executeQuery(query.toString());
+			Commit();
 			return true;
 		}
 		catch (SQLException sqlex)
@@ -477,7 +509,20 @@ public class DatabaseController
 		}
 	}
 
-	// a) The names and the telephone numbers of the Managers of each office.
+	/**
+	 * Function: query1()
+	 * Description: This function will execute the query
+	 * The names and the telephone numbers of the Managers of each office.
+	 * Then, it will parse through the result of the query and build 
+	 * an ArrayList object containing String arrays, where each array corresponds to
+	 * an individual tuple in the result table. The ArrayList object is then returned.
+	 * 
+	 * @input: none
+	 *
+	 * @return: Return ArrayList containing contents of table where each element is a
+	 * String array containing fields of a given tuple and the table contains the result
+	 * of the query
+	 **/
 	public ArrayList<String[]> query1() throws SQLException
 	{
 
@@ -518,7 +563,20 @@ public class DatabaseController
 		return result;
 	}
 
-	// d) The total number of staff at each office.
+	/**
+	 * Function: query2()
+	 * Description: This function will execute the query
+	 * The total number of staff at each office. 
+	 * Then, it will parse through the result of the query and build 
+	 * an ArrayList object containing String arrays, where each array corresponds to
+	 * an individual tuple in the result table. The ArrayList object is then returned.
+	 * 
+	 * @input: none
+	 *
+	 * @return: Return ArrayList containing contents of table where each element is a
+	 * String array containing fields of a given tuple and the table contains the result
+	 * of the query
+	 **/
 	public ArrayList<String[]> query2() throws SQLException
 	{
 
@@ -558,7 +616,20 @@ public class DatabaseController
 		return result;
 	}
 
-	// g) The details of interviews conducted by a given Instructor.
+	/**
+	 * Function: query3(instructorID)
+	 * Description: This function will execute the query
+	 * The total number of staff at each office. 
+	 * Then, it will parse through the result of the query and build 
+	 * an ArrayList object containing String arrays, where each array corresponds to
+	 * an individual tuple in the result table. The ArrayList object is then returned.
+	 * 
+	 * @input: CHANGE THIS THING
+	 *
+	 * @return: Return ArrayList containing contents of table where each element is a
+	 * String array containing fields of a given tuple and the table contains the result
+	 * of the query
+	 **/
 	public ArrayList<String[]> query3(int instructorID) throws SQLException
 	{
 
@@ -600,7 +671,20 @@ public class DatabaseController
 		return result;
 	}
 
-	// j) The reg number of cars that have had no faults found.
+	/**
+	 * Function: query4()
+	 * Description: This function will execute the query
+	 * The reg number of cars that have had no faults found.
+	 * Then, it will parse through the result of the query and build 
+	 * an ArrayList object containing String arrays, where each array corresponds to
+	 * an individual tuple in the result table. The ArrayList object is then returned.
+	 * 
+	 * @input: none
+	 *
+	 * @return: Return ArrayList containing contents of table where each element is a
+	 * String array containing fields of a given tuple and the table contains the result
+	 * of the query
+	 **/
 	public ArrayList<String[]> query4() throws SQLException
 	{
 
@@ -639,7 +723,20 @@ public class DatabaseController
 		return result;
 	}
 
-	// o) The number of administrative staff located at each office.
+	/**
+	 * Function: query5()
+	 * Description: This function will execute the query
+	 * The number of administrative staff located at each office. 
+	 * Then, it will parse through the result of the query and build 
+	 * an ArrayList object containing String arrays, where each array corresponds to
+	 * an individual tuple in the result table. The ArrayList object is then returned.
+	 * 
+	 * @input: none
+	 *
+	 * @return: Return ArrayList containing contents of table where each element is a
+	 * String array containing fields of a given tuple and the table contains the result
+	 * of the query
+	 **/
 	public ArrayList<String[]> query5() throws SQLException
 	{
 
@@ -677,6 +774,5 @@ public class DatabaseController
 
 		} // end of rs.next
 		return result;
-
 	}
 }
