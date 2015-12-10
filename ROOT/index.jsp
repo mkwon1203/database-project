@@ -17,6 +17,9 @@
             <div class="mui-panel">
 				<%
 					String table = request.getParameter("tableName");
+					if ( table == null){
+						table = "employee";
+					}
 					//identify how many primary keys there are for this table
 					//if not in the switch, then it's 1 primary key
 					//if it is a table in the switch, there's 3 primary keys
