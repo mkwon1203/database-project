@@ -164,7 +164,7 @@
             <div class="mui-panel">
 
                 <!--dropdown to select table to display-->
-                <div class="mui-dropdown myDropdown">
+                <div class="mui-dropdown myDropdown" style="display: inline-flex;">
                     <button class="mui-btn mui-btn--primary" data-mui-toggle="dropdown">
                         Select A Query
                         <span class="mui-caret"></span>
@@ -177,6 +177,28 @@
                         <li><a href="index.jsp?<%=tableSelection%>&query=5">Query #5</a></li>
                     </ul>
                 </div>
+
+                <div class="mui--text-title" style="padding: 10px;">
+                    <% 
+                    	switch(Integer.parseInt(query)){
+                    		case 1:
+                    			out.write("The names and the telephone numbers of the Managers of each office.");
+                    			break;
+                    		case 2:
+                    			out.write("The total number of staff at each office. ");
+                    			break;
+                    		case 3:
+                    			out.write("The details of interviews conducted by a given Instructor.");
+                    			break;
+                    		case 4:
+                    			out.write("The registration number of cars that have had no faults found.");
+                    			break;
+                    		case 5:
+                    			out.write("The number of administrative staff located at each office.");
+                    			break;
+                    	}
+                    %>
+                    </div>
 
 			<% 
 				//check that query is set
@@ -202,6 +224,7 @@
 							results = dbcontroller.query3(Integer.parseInt(empid));
 						}else{
 							out.write("Please enter a employee ID to search for: <form action='index.jsp?" + tableSelection +"&" + querySelection + "' method='POST'><input type='text' name='empid' required><input type='submit' value='Query' class='mui-btn mui-btn--primary'>");
+
 							results = null;
 						}
 						break;
