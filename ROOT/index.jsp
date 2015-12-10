@@ -107,8 +107,8 @@
 							String[] s = results.get(i);
 
 							//delcare a string to store the get parameters for delete
-							String deleteParms = "delete.jsp?" + tableSelection + "&" + querySelection;
-
+							String primaryKeyParms = tableSelection + "&" + querySelection;
+							String deleteParms = "", updateParms = "";
 							//if printing headers, get the attribute name
 							if (i == 0){
 								primaryKey1 = s[0];
@@ -120,17 +120,18 @@
 								primaryKey1value = s[0];
 								
 								//add the primary key values to the delete link
-								deleteParms += "&primaryKey1=" + primaryKey1 + "&primaryKey1value=" + primaryKey1value;
+								primaryKeyParms += "&primaryKey1=" + primaryKey1 + "&primaryKey1value=" + primaryKey1value;
 
 								if (primaryKeyCount > 1){
 									primaryKey2value = s[1];
 									primaryKey3value = s[2];
 
-									deleteParms += "&primaryKey2=" + primaryKey2 + "&primaryKey2value=" + primaryKey2value + "&primaryKey3=" + primaryKey3 + "&primaryKey3value=" + primaryKey3value;
+									primaryKeyParms += "&primaryKey2=" + primaryKey2 + "&primaryKey2value=" + primaryKey2value + "&primaryKey3=" + primaryKey3 + "&primaryKey3value=" + primaryKey3value;
 								}
 							}
 							//loop through all the attribute values and print table cells
-
+							deleteParms = "delete.jsp?" + primaryKeyParms;
+							updateParms = "edit.jsp?" + primaryKeyParms;
 
 							for(int j=0; j<s.length; j++){
 								if(i==0){
