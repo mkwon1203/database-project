@@ -103,7 +103,6 @@
 						out.write("<BR><BR>NULL<BR><BR>");
 					}
 				
-					dbcontroller.Close();
 				%>
 				
 				
@@ -184,6 +183,7 @@
 					}else{
 						out.write("<BR><BR>NULL<BR><BR>");
 					}
+					dbcontroller.Close();
 			%>
 
             </div>
