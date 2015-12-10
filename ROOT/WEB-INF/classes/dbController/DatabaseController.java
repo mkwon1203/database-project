@@ -741,7 +741,7 @@ public class DatabaseController
 	public ArrayList<String[]> query5() throws SQLException
 	{
 
-		String sql_query = "select count(*), officeID from rdmelzer.employee where jobTitle='Admistrative staff' group by officeID";
+		String sql_query = "select count(*), officeID from rdmelzer.employee where jobTitle='Administrative staff' group by officeID";
 		int templen = 2;
 		ResultSet rs = null;
 		ArrayList<String[]> result = null;
