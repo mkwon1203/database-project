@@ -69,7 +69,9 @@
 					if(table == null){
 						table = "employee";
 					}
-					out.write("<a href='edit.jsp?" + querySelection + "'><button class='mui-btn mui-btn--primary'>Edit Table</button></a>");
+					if(table.equals("car")){
+						out.write("<a href='edit.jsp?" + querySelection + "'><button class='mui-btn mui-btn--primary'>Edit Table</button></a>");
+					}
 					//Write out a header for the table with a capitolized name
 					out.write("<h1 style='text-align:center;font-size:50px;padding-bottom:15px'>" + table.substring(0,1).toUpperCase() + table.substring(1) + "s</h1>");
 
@@ -185,6 +187,7 @@
 				dbcontroller = new DatabaseController();
 				dbcontroller.Open();
 				int queryInt = Integer.parseInt(query);
+				String empid = request.getParameter("empid");
 
 				// switch on the query to have the java class execute the right special query
 				switch (queryInt){
@@ -195,7 +198,12 @@
 						results = dbcontroller.query2();
 						break;
 					case 3:
-						results = dbcontroller.query3(2);
+						if(empid != null){
+							results = dbcontroller.query3(Integer.parseInt(empid));
+						}else{
+							out.write("Please enter a employee ID to search for: <form action='index.jsp?" + insertParams + "'><input type='text' name='empid' required><input type='submit' value='Query' class='mui-btn mui-btn--primary'>");
+							results = null;
+						}
 						break;
 					case 4:
 						results = dbcontroller.query4();
@@ -206,38 +214,38 @@
 				}
 
 				//print a header for the table
-
+				
 				//print the query results
 				//if there are results
-					if(results != null && results.size() > 0){
-						out.write("<table class='mui-table myTable'>");	
-						//loop through the loop of results
-						for(int i=0; i<results.size(); i++){
-							if(i==0){
-								out.write("<thead>");
-							}
-							out.write("<tr>");
-							String[] s = results.get(i);
-							//loop through all the attribute values and print table cells
-							for(int j=0; j<s.length; j++){
-								if(i==0){
-									out.write("<th>" + s[j] + "</th>");
-								}else{
-									out.write("<td>" + s[j] + "</td>");
-								}
-							}
-							if(i==0){
-								out.write("</thead>");
-							}
-							out.write("</tr>");
+				if(results != null && results.size() > 0){
+					out.write("<table class='mui-table myTable'>");	
+					//loop through the loop of results
+					for(int i=0; i<results.size(); i++){
+						if(i==0){
+							out.write("<thead>");
 						}
-						
-						out.write("</tr></table>");
-						
-					}else{
-						out.write("<BR><BR>NULL<BR><BR>");
+						out.write("<tr>");
+						String[] s = results.get(i);
+						//loop through all the attribute values and print table cells
+						for(int j=0; j<s.length; j++){
+							if(i==0){
+								out.write("<th>" + s[j] + "</th>");
+							}else{
+								out.write("<td>" + s[j] + "</td>");
+							}
+						}
+						if(i==0){
+							out.write("</thead>");
+						}
+						out.write("</tr>");
 					}
-					dbcontroller.Close();
+					
+					out.write("</tr></table>");
+					
+				}else{
+					out.write("<BR><BR>NO RESULTS<BR><BR>");
+				}
+				dbcontroller.Close();
 			%>
 
             </div>
