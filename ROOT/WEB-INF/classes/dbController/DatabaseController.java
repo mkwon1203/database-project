@@ -305,8 +305,9 @@ public class DatabaseController {
     query.append(tableName);
     query.append(" WHERE ");
 
+//attrValues.length
     //loop through the attributes and append them to the WHERE clause
-    for (int i = 0; i < attrValues.length; i++){
+    for (int i = 0; i < 1; i++){
       query.append(attrValues[i][0]);
       query.append("='");
       query.append(attrValues[i][1]);

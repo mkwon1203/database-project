@@ -36,12 +36,10 @@
 		    deleteParameters[0][0] = primaryKey1;
 		    deleteParameters[0][1] = compositeKeys[0];
 
-		    if (keyCounter > 1){
+		    if (compositeKeys[1] != null){
 		    	deleteParameters[1][0] = primaryKey2;
 		    	deleteParameters[1][1] = compositeKeys[1];
-			}
-
-			if (keyCounter > 2) {
+			
 		    	deleteParameters[2][0] = primaryKey3;
 		    	deleteParameters[2][1] = compositeKeys[2];
 			}
