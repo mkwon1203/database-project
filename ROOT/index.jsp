@@ -124,8 +124,10 @@
 								}
 							}
 							//loop through all the attribute values and print table cells
+
 							out.write("<th>   <button class=\"mui-btn mui-btn--primary\">
 									<a href=\"" + deleteParms + "\">Button</a></button> </th>");
+
 							for(int j=0; j<s.length; j++){
 								if(i==0){
 									out.write("<th>" + s[j] + "</th>");
@@ -133,8 +135,12 @@
 									out.write("<td>" + s[j] + "</td>");
 								}
 							}
+							
 							if(i==0){
+								out.write("<th></th>");
 								out.write("</thead>");
+							}else{
+								out.write("<td><button class=\"mui-btn mui-btn--primary\">Delete</button></td>");
 							}
 							out.write("</tr>");
 						}
