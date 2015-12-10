@@ -88,9 +88,8 @@
 				out.write("FINISHED");
 			}
 			
-			if(worked){
-				response.sendRedirect(link);
-			}
+			response.sendRedirect(link);
+
 		%>
 	</body>
 </html>

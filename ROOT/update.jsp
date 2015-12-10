@@ -27,9 +27,8 @@
 			dbc.Commit();
 			dbc.Close();
 			
-			if (worked){
-				response.sendRedirect("edit.jsp?query=" + queryParam);
-			}
+			response.sendRedirect("edit.jsp?query=" + queryParam);
+
 		%>
 
 	</body>
