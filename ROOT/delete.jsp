@@ -15,7 +15,7 @@
 	<body>
 		<% 
 			String tableName = "", link = "";
-			String[] compositeKeys = new String[5];
+			String[] compositeKeys = new String[3];
 			int keyCounter = 0;
 			String primaryKey1 = "", primaryKey2 = "", primaryKey3 = "";
 
@@ -32,7 +32,7 @@
 
 		    
 
-		    String[][] deleteParameters = new String[5][5];
+		    String[][] deleteParameters = new String[3][2];
 		    deleteParameters[0][0] = primaryKey1;
 		    deleteParameters[0][1] = compositeKeys[0];
 
@@ -46,16 +46,18 @@
 
 			DatabaseController dbc = new DatabaseController();
 
-			Boolean success = false;
+			String success = "";
 			dbc.Open();
 			out.write("about to remove from " + tableName);
 			success = dbc.Remove(tableName, deleteParameters);
 			dbc.Commit();
 			dbc.Close();
 			out.write("remove query executed, if successful will redirect <br>");
-			if (success){
-				//response.sendRedirect(link);
-				out.write(tableName + "<br>" + deleteParameters[0][0] + " " + deleteParameters[0][1]);
+			if (success.equals("")){
+				response.sendRedirect(link);
+				//out.write(tableName + "<br>" + deleteParameters[0][0] + " " + deleteParameters[0][1]);
+			}else {
+				out.write(success);
 			}
 		%>
 
