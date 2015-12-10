@@ -265,7 +265,7 @@ public class DatabaseController {
     //try to execute the query and return true on success
     //print stack trace and return false if unsuccessful
     try{
-      statement_.executeUpdate(query.toString());
+      ResultSet rs = statement_.executeQuery(query.toString());
       return true;
     } catch (SQLException sqlex){
       sqlex.printStackTrace();
