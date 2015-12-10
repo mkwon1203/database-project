@@ -194,7 +194,7 @@
                     			out.write("The registration number of cars that have had no faults found.");
                     			break;
                     		case 5:
-                    			out.write("The number of administrative staff located at each office.")
+                    			out.write("The number of administrative staff located at each office.");
                     			break;
                     	}
                     %>
