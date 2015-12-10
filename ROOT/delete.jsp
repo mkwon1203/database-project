@@ -15,7 +15,7 @@
 	<body>
 		<% 
 			String tableName = "", link = "";
-			String[] compositeKeys = new String[3];
+			String[] compositeKeys = new String[5];
 			int keyCounter = 0;
 			String primaryKey1 = "", primaryKey2 = "", primaryKey3 = "";
 
@@ -44,7 +44,7 @@
 		        }
 		    }
 
-		    String[][] deleteParameters = new String[3][3];
+		    String[][] deleteParameters = new String[5][5];
 		    deleteParameters[0][0] = primaryKey1;
 		    deleteParameters[0][1] = compositeKeys[0];
 
