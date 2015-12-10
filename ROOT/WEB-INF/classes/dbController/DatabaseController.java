@@ -1,6 +1,9 @@
 
 package dbController;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -269,8 +272,20 @@ public class DatabaseController {
       return true;
     } catch (SQLException sqlex){
       sqlex.printStackTrace();
-      return false;
-    }
+      File file = new File("dbcontroller.insert.log");
+      PrintStream stream = null;
+		try
+		{
+			stream = new PrintStream(file);
+		}
+		catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   sqlex.printStackTrace(stream);
+	   return false;
+	 }
   }
 
   /**
