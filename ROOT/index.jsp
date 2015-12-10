@@ -65,9 +65,27 @@
 
 					//Call display table from the java class
 					String tName = table.substring(0,1).toUpperCase() + table.substring(1);
+					
+					//call the query to display the table from the java class
 					results = dbcontroller.DisplayTable(table);
+
+					//identify how many primary keys there are for this table
+					//if not in the switch, then it's 1 primary key
+					//if it is a table in the switch, there's 3 primary keys
+					int primaryKeyCount = 1;
+					switch (table){
+						case "lesson":
+						case "test":
+						case "interview":
+							primaryKeyCount = 3;
+							break;
+					}
 					
-					
+					//declare strings for the primary keys to pass to delete
+					String primaryKey1, primaryKey2, primaryKey3;
+
+					//declare strings for primary key values to pass to delete
+					String primaryKey1value, primaryKey2value, primaryKey3value;
 					//if there are results
 					if(results != null && results.size() > 0){
 						out.write("<table class='mui-table myTable'>");	
@@ -77,9 +95,37 @@
 								out.write("<thead>");
 							}
 							out.write("<tr>");
+
+							//get the current tuple's attribute values
 							String[] s = results.get(i);
+
+							//delcare a string to store the get parameters for delete
+							String deleteParms = "delete.jsp?tableName=" + tableSelection + "&querySelection=" + querySelection;
+
+							//if printing headers, get the attribute name
+							if (i == 0){
+								primaryKey1 = s[0];
+								if (primaryKeyCount == 3){
+									primaryKey2 = s[1];
+									primaryKey3 = s[3];
+								}
+							} else{
+								primaryKey1value = s[0];
+								
+								//add the primary key values to the delete link
+								deleteParms += "&primaryKey1=" + primaryKey1 + "&primaryKey1value=" + primaryKey1value;
+
+								if (primaryKeyCount > 1){
+									primaryKey2value = s[1];
+									primaryKey3value = s[2];
+
+									deleteParms += "&primaryKey2=" + primaryKey2 + "&primaryKey2value=" + primaryKey2value +
+													"&primaryKey3=" + primaryKey3 + "&primaryKey3value=" + primaryKey3value;
+								}
+							}
 							//loop through all the attribute values and print table cells
-							out.write("<th>   <button class=\"mui-btn mui-btn--primary\">Button</button> </th>");
+							out.write("<th>   <button class=\"mui-btn mui-btn--primary\">
+									<a href=\"" + deleteParms + "\">Button</a></button> </th>");
 							for(int j=0; j<s.length; j++){
 								if(i==0){
 									out.write("<th>" + s[j] + "</th>");
