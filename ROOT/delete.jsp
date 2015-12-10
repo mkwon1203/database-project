@@ -35,7 +35,7 @@
 		        	primaryKey3 = request.getParameter(paramName);
 
 		        else if (paramName == "query")
-		        	link = "index.jsp?tableName=" + request.getParameter(tableName) + "&query=" + request.getParameter(query);
+		        	link = "index.jsp?tableName=" + request.getParameter("tableName") + "&query=" + request.getParameter("query");
 
 		        //otherwise it's a primary key value
 		        else{
