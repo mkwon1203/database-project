@@ -62,10 +62,11 @@
 
 			Boolean success = false;
 			dbc.Open();
+			out.write("about to remove from " + tableName);
 			success = dbc.Remove(tableName, deleteParameters);
 			dbc.Commit();
 			dbc.Close();
-
+			out.write("remove query executed, if successful will redirect");
 			if (success)
 				response.sendRedirect(link);
 		%>
