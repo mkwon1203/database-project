@@ -169,6 +169,7 @@
                         Select A Query
                         <span class="mui-caret"></span>
                     </button>
+                    <div class="mui--text-title">The names and the telephone numbers of the Managers of each office.</div>
                     <ul class="mui-dropdown__menu" style="top: 42px;">
                         <li><a href="index.jsp?<%=tableSelection%>&query=1">Query #1</a></li>
                         <li><a href="index.jsp?<%=tableSelection%>&query=2">Query #2</a></li>
