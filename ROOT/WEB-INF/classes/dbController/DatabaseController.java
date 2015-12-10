@@ -256,7 +256,7 @@ public class DatabaseController {
 
       //if not at the last attribute, add a comma seperator
       if (i != attrValues.length-1){
-        query.append(", ");
+        query.append(",");
       }
 
       query.append(")");

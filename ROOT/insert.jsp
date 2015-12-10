@@ -83,11 +83,10 @@
 				DatabaseController dbcontroller = new DatabaseController();
 				dbcontroller.Open();
 				worked = dbcontroller.Insert(table, s);
+				dbcontroller.Commit();
 				dbcontroller.Close();
 				out.write("FINISHED");
 			}
-			if(worked){
-				response.sendRedirect(link);
-			}
+			response.sendRedirect(link);
 		%>
 	</body>
