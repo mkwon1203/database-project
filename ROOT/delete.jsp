@@ -32,7 +32,7 @@
 		        else if (paramName == "primaryKey2")
 		        	primaryKey2 = request.getParameter(paramName);
 		        else if (paramName == "primaryKey3")
-		        	primaryKey3 = request.getParamater(paramName);
+		        	primaryKey3 = request.getParameter(paramName);
 
 		        else if (paramName == "query")
 		        	link = "index.jsp?tableName=" + request.getParameter(tableName) + "&query=" + request.getParameter(query);
