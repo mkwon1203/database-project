@@ -154,7 +154,7 @@
 						out.write("<td><input class='mui-btn mui-btn--primary' type='submit' value='Insert'></form></td>");
 						out.write("</tr></table>");
 					}else{
-						out.write("<BR><BR>NULL<BR><BR>");
+						out.write("<BR><BR>NO RESULTS<BR><BR>");
 					}
 					dbcontroller.Close();
 				%>
@@ -201,7 +201,7 @@
 						if(empid != null){
 							results = dbcontroller.query3(Integer.parseInt(empid));
 						}else{
-							out.write("Please enter a employee ID to search for: <form action='index.jsp?" + insertParams + "'><input type='text' name='empid' required><input type='submit' value='Query' class='mui-btn mui-btn--primary'>");
+							out.write("Please enter a employee ID to search for: <form action='index.jsp?" + tableSelection +"&" + querySelection + "' method='POST'><input type='text' name='empid' required><input type='submit' value='Query' class='mui-btn mui-btn--primary'>");
 							results = null;
 						}
 						break;
