@@ -33,6 +33,7 @@
 					}else{
 						querySelection += "query=" + query;
 					}
+
 					
 				%>
                 <!--dropdown to select table to display-->
@@ -134,57 +135,57 @@
 				dbcontroller.Open();
 				int queryInt = Integer.parseInt(query);
 
-				//switch on the query to have the java class execute the right special query
-				// switch (queryInt){
-				// 	case 1:
-				// 		results = dbcontroller.query1();
-				// 		break;
-				// 	case 2:
-				// 		results = dbcontroller.query2();
-				// 		break;
-				// 	case 3:
-				// 		results = dbcontroller.query3(2);
-				// 		break;
-				// 	case 4:
-				// 		results = dbcontroller.query4();
-				// 		break;
-				// 	case 5:
-				// 		results = dbcontroller.query5();
-				// 		break;
-				// }
+				switch on the query to have the java class execute the right special query
+				switch (queryInt){
+					case 1:
+						results = dbcontroller.query1();
+						break;
+					case 2:
+						results = dbcontroller.query2();
+						break;
+					case 3:
+						results = dbcontroller.query3(2);
+						break;
+					case 4:
+						results = dbcontroller.query4();
+						break;
+					case 5:
+						results = dbcontroller.query5();
+						break;
+				}
 
-				// //print a header for the table
+				//print a header for the table
 
-				// //print the query results
-				// //if there are results
-				// 	if(results != null && results.size() > 0){
-				// 		out.write("<table class='mui-table myTable'>");	
-				// 		//loop through the loop of results
-				// 		for(int i=0; i<results.size(); i++){
-				// 			if(i==0){
-				// 				out.write("<thead>");
-				// 			}
-				// 			out.write("<tr>");
-				// 			String[] s = results.get(i);
-				// 			//loop through all the attribute values and print table cells
-				// 			for(int j=0; j<s.length; j++){
-				// 				if(i==0){
-				// 					out.write("<th>" + s[j] + "</th>");
-				// 				}else{
-				// 					out.write("<td>" + s[j] + "</td>");
-				// 				}
-				// 			}
-				// 			if(i==0){
-				// 				out.write("</thead>");
-				// 			}
-				// 			out.write("</tr>");
-				// 		}
+				//print the query results
+				//if there are results
+					if(results != null && results.size() > 0){
+						out.write("<table class='mui-table myTable'>");	
+						//loop through the loop of results
+						for(int i=0; i<results.size(); i++){
+							if(i==0){
+								out.write("<thead>");
+							}
+							out.write("<tr>");
+							String[] s = results.get(i);
+							//loop through all the attribute values and print table cells
+							for(int j=0; j<s.length; j++){
+								if(i==0){
+									out.write("<th>" + s[j] + "</th>");
+								}else{
+									out.write("<td>" + s[j] + "</td>");
+								}
+							}
+							if(i==0){
+								out.write("</thead>");
+							}
+							out.write("</tr>");
+						}
 						
-				// 		out.write("</tr></table>");
+						out.write("</tr></table>");
 						
-				// 	}else{
-				// 		out.write("<BR><BR>NULL<BR><BR>");
-				// 	}
+					}else{
+						out.write("<BR><BR>NULL<BR><BR>");
+					}
 					dbcontroller.Close();
 			%>
 
