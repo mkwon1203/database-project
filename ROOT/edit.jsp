@@ -11,12 +11,6 @@
 	
 	<%@ page import="dbController.DatabaseController,java.util.*,java.lang.StringBuffer" %>
 	
-	<script>
-		function back(){
-			window.location="index.jsp?tableName=car&query=1";
-		}
-	</script>
-	
 	<body>
 		<div class="mui-appbar topbar">
 			<div class="mui-container centerTitle">
@@ -33,7 +27,9 @@
 			DatabaseController dbcontroller = new DatabaseController();
 			dbcontroller.Open();
 			
-			out.write("<button class='mui-btn mui-btn--primary' onclick='back()'>Back</form>");
+			String queryParam = request.getParameter("query");
+			
+			out.write("<a href='index.jsp?tableName=car&query=" + queryParam +"'<button class='mui-btn mui-btn--primary'>Back</button></a>");
 			out.write("<h1 style='text-align:center;font-size:50px;padding-bottom:15px'>Editing Cars</h1>");
 			
 			results = dbcontroller.DisplayTable("car");
@@ -65,17 +61,10 @@
 						out.write("<th></th>");
 						out.write("</thead>");
 					}else{
-						out.write("<td><a href='update.jsp?regnum=" + s[0] + "'><button class='mui-btn mui-btn--primary'>TOGGLE FAULT</button></a> </td>");
+						out.write("<td><a href='update.jsp?regnum=" + s[0] + "&query=" + queryParam + "'><button class='mui-btn mui-btn--primary'>TOGGLE FAULT</button></a> </td>");
 					}
 					out.write("</tr>");
 				}
-				//out.write("<tr><form action='insert.jsp' method='POST'>");
-				//out.write("<input type='text' name='link' style='display:none' value='index.jsp?" + insertParams+ "'>");
-				//out.write("<input type='text' name='table' style='display:none' value='" + table+ "'>");
-				//String[] headers = results.get(0);
-				//for(int y=0; y<headers.length; y++){
-				//	out.write("<td><input type='text' name='" + headers[y] +"' required></td>");
-				//}
 				out.write("</table>");
 			}else{
 				out.write("<BR><BR>NULL<BR><BR>");

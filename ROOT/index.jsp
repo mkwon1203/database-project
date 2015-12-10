@@ -61,13 +61,6 @@
                     </ul>
                 </div>
 				
-				<script>
-					function redirectToEdit(){
-						window.location="edit.jsp";
-					}
-				</script>
-				<button class="mui-btn mui-btn--primary" onclick="redirectToEdit()">Edit Table</button>
-				
 				<%
 					ArrayList<String[]> results = null;
 					DatabaseController dbcontroller = new DatabaseController();
@@ -76,7 +69,7 @@
 					if(table == null){
 						table = "employee";
 					}
-
+					out.write("<a href='edit.jsp?" + querySelection + "'><button class='mui-btn mui-btn--primary'>Edit Table</button></a>");
 					//Write out a header for the table with a capitolized name
 					out.write("<h1 style='text-align:center;font-size:50px;padding-bottom:15px'>" + table.substring(0,1).toUpperCase() + table.substring(1) + "s</h1>");
 
@@ -151,7 +144,7 @@
 						}
 						out.write("<tr><form action='insert.jsp' method='POST'>");
 						out.write("<input type='text-field' name='link' style='display:none' value='index.jsp?" + insertParams+ "'>");
-						out.write("<input type='text-field' name='table' style='display:none' value='" + table+ "'>");
+						out.write("<input type='text-field' name='table' style='display:none' value='" + table + "'>");
 						String[] headers = results.get(0);
 						for(int y=0; y<headers.length; y++){
 							out.write("<td><input type='text-field' name='" + headers[y] +"' required></td>");

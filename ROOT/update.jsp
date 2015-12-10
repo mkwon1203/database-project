@@ -15,18 +15,20 @@
 	<body>
 		<% 
 			//retrive all GET parameters
-			regnum = request.getParameter("regnum");
+			String regnum = request.getParameter("regnum");
+			String queryParam = request.getParameter("query");
 		    
 			DatabaseController dbc = new DatabaseController();
-
+			
+			boolean worked = false;
 			dbc.Open();
-			boolean worked = out.write("If page does not redirect then something went wrong!<br>Go back and try again!");
+			worked = out.write("If page does not redirect then something went wrong!<br>Go back and try again!");
 			dbc.Update(regnum);
 			dbc.Commit();
 			dbc.Close();
 			
 			if (worked){
-				response.sendRedirect("edit.jsp");
+				response.sendRedirect("edit.jsp?query=" + queryParam);
 			}
 		%>
 
