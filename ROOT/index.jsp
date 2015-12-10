@@ -17,6 +17,13 @@
             <div class="mui-panel">
 				<%
 					String table = request.getParameter("tableName");
+					//identify how many primary keys there are for this table
+					//if not in the switch, then it's 1 primary key
+					//if it is a table in the switch, there's 3 primary keys
+					int primaryKeyCount = 1;
+					if (table.toLowerCase() == "lesson" || table.toLowerCase() == "test" || table.toLowerCase() == "interview"){
+							primaryKeyCount = 3;
+					}
 					String query = request.getParameter("query");
 					String tableSelection = "";
 					String querySelection = "";
@@ -69,13 +76,7 @@
 					//call the query to display the table from the java class
 					results = dbcontroller.DisplayTable(table);
 
-					//identify how many primary keys there are for this table
-					//if not in the switch, then it's 1 primary key
-					//if it is a table in the switch, there's 3 primary keys
-					int primaryKeyCount = 1;
-					if (table.toLowerCase() == "lesson" || table.toLowerCase() == "test" || table.toLowerCase() == "interview"){
-							primaryKeyCount = 3;
-					}
+					
 					
 					//declare strings for the primary keys to pass to delete
 					String primaryKey1 = "", primaryKey2 = "", primaryKey3 = "";
