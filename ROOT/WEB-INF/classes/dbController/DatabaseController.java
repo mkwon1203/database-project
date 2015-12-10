@@ -243,48 +243,77 @@ public class DatabaseController {
   *
   * @return: Return True if successful, False otherwise
   **/
-  public boolean Insert(String tableName, String[] attrValues){
-    StringBuffer query = new StringBuffer();
-    query.append("INSERT INTO ");
-    query.append(username);
-    query.append(".");
-    query.append(tableName);
-    query.append(" VALUES (");
+  public boolean Insert(String tableName, String[] attrValues)
+	{
+		StringBuffer query = new StringBuffer();
+		query.append("INSERT INTO ");
+		query.append(username);
+		query.append(".");
+		query.append(tableName);
+		query.append(" VALUES (");
 
-    //loop through the array of attributes and add them to the query string
-    for (int i = 0; i < attrValues.length; i++){
-      query.append("'");
-      query.append(attrValues[i]);
-      query.append("'");
+		// loop through the array of attributes and add them to the query string
+		for (int i = 0; i < attrValues.length; i++)
+		{
+			if (tableName.equalsIgnoreCase("employee") && i == 2)
+			{
+				query.append("TO_DATE('");
+				query.append(attrValues[i]);
+				query.append("', 'YYYY-MM-DD')");
+			}
+			else if (tableName.equalsIgnoreCase("client") && i == 3)
+			{
+				query.append("TO_DATE('");
+				query.append(attrValues[i]);
+				query.append("', 'YYYY-MM-DD')");
+			}
+			else if ((tableName.equalsIgnoreCase("lesson")
+					|| tableName.equalsIgnoreCase("test")
+					|| tableName.equalsIgnoreCase("interview")) && i == 2)
+			{
+				query.append("TO_TIMESTAMP('");
+				query.append(attrValues[i]);
+				query.append("', 'YYYY-MM-DD HH24:MI:SS')");
+			}
+			else
+			{
+				query.append("'");
+				query.append(attrValues[i]);
+				query.append("'");
+			}
 
-      //if not at the last attribute, add a comma seperator
-      if (i != attrValues.length-1){
-        query.append(",");
-      }
-    }
-	query.append(")");    
-    //try to execute the query and return true on success
-    //print stack trace and return false if unsuccessful
-    try{
-      statement_.executeUpdate(query.toString());
-      return true;
-    } catch (SQLException sqlex){
-      sqlex.printStackTrace();
-      File file = new File("dbcontroller.insert.log");
-      PrintStream stream = null;
+			// if not at the last attribute, add a comma seperator
+			if (i != attrValues.length - 1)
+			{
+				query.append(",");
+			}
+		}
+		query.append(")");
+		// try to execute the query and return true on success
+		// print stack trace and return false if unsuccessful
 		try
 		{
-			stream = new PrintStream(file);
+			statement_.executeUpdate(query.toString());
+			return true;
 		}
-		catch (FileNotFoundException e)
+		catch (SQLException sqlex)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			sqlex.printStackTrace();
+			File file = new File("dbcontroller.insert.log");
+			PrintStream stream = null;
+			try
+			{
+				stream = new PrintStream(file);
+			}
+			catch (FileNotFoundException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			sqlex.printStackTrace(stream);
+			return false;
 		}
-	   sqlex.printStackTrace(stream);
-	   return false;
-	 }
-  }
+	}
 
   /**
   * Function: Remove(tableName, attrValues)
@@ -319,6 +348,10 @@ public class DatabaseController {
       }
     }
 
+    PrintWriter writer = new PrintWriter("dbc-remove.log", "UTF-8");
+    writer.println(query.toString());
+    writer.close();
+    
     //try to execute the query and return true on success
     //print stack trace and return false if unsuccessful
     try{
