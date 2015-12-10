@@ -124,8 +124,7 @@
 							}
 							//loop through all the attribute values and print table cells
 
-							out.write("<th>   <button class=\"mui-btn mui-btn--primary\">
-									<a href=\"" + deleteParms + "\">Button</a></button> </th>");
+							out.write("<th>   <button class=\"mui-btn mui-btn--primary\"> <a href=\"" + deleteParms + "\">Button</a></button> </th>");
 
 							for(int j=0; j<s.length; j++){
 								if(i==0){
