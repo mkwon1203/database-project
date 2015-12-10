@@ -55,8 +55,10 @@
 			dbc.Commit();
 			dbc.Close();
 			out.write("remove query executed, if successful will redirect");
-			if (success)
-				response.sendRedirect(link);
+			if (success){
+				//response.sendRedirect(link);
+				out.write(tableName + "<br>" + compositeKeys[0] + "<br>" + compositeKeys[1] + "<br>" + compositeKeys[2] + "<br>");
+			}
 		%>
 
 	</body>
