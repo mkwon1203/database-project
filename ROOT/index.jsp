@@ -201,7 +201,8 @@
 						if(empid != null){
 							results = dbcontroller.query3(Integer.parseInt(empid));
 						}else{
-							out.write("Please enter a employee ID to search for: <form action='index.jsp?query=3&" + insertParams + "'><input type='text' name='empid' required>&nbsp&nbsp&nbsp<input type='submit' value='Query' class='mui-btn mui-btn--primary'>");
+							out.write("Please enter a employee ID to search for: <form action='index.jsp?query=3&" + insertParams + "'><input type='text' name='empid' required>" + 
+							" <input type='hidden' name='tableName' value='3'> <input type='hidden' name='query' value='3'> &nbsp&nbsp&nbsp<input type='submit' value='Query' class='mui-btn mui-btn--primary'>");
 							results = null;
 						}
 						break;
