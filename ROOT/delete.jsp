@@ -14,10 +14,10 @@
 	
 	<body>
 		<% 
-			String tableName, link;
-			String[] compositeKeys;
+			String tableName = "", link = "";
+			String[] compositeKeys = new String[3];
 			int keyCounter = 0;
-			String primaryKey1, primaryKey2, primaryKey3;
+			String primaryKey1 = "", primaryKey2 = "", primaryKey3 = "";
 
 			java.util.Enumeration params = request.getParameterNames();
 		    while(params.hasMoreElements()) {
@@ -44,7 +44,7 @@
 		        }
 		    }
 
-		    String[][] deleteParameters;
+		    String[][] deleteParameters = new String[3][3];
 		    deleteParameters[0][0] = primaryKey1;
 		    deleteParameters[0][1] = compositeKeys[0];
 
