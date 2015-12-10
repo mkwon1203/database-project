@@ -11,7 +11,11 @@
 	
 	<%@ page import="dbController.DatabaseController,java.util.*,java.lang.StringBuffer" %>
 	
-	
+	<script>
+		function back(){
+			window.location="index.jsp?tableName=car&query=1";
+		}
+	</script>
 	
 	<body>
 		<div class="mui-appbar topbar">
@@ -29,6 +33,7 @@
 			DatabaseController dbcontroller = new DatabaseController();
 			dbcontroller.Open();
 			
+			out.write("<button class='mui-btn mui-btn--primary' onclick='back()'>Back</form>");
 			out.write("<h1 style='text-align:center;font-size:50px;padding-bottom:15px'>Editing Cars</h1>");
 			
 			results = dbcontroller.DisplayTable("car");
@@ -51,13 +56,7 @@
 							out.write("<th>" + s[j] + "</th>");
 						}else{
 							out.write("<td>");
-							if(j==0){
-								out.write("<input type='text' id='regnum"+i+"' value='"+s[j]+"' style='display:none'>"+s[j]);
-							}else if(j==2){
-								out.write("<input type='text' id='faulted"+ i +"' value='"+ s[j] +"'>");
-							}else{
-								out.write(s[j]);
-							}
+							out.write(s[j]);
 							out.write("</td>");
 						}
 					}
@@ -66,7 +65,7 @@
 						out.write("<th></th>");
 						out.write("</thead>");
 					}else{
-						out.write("<td><a href='" + deleteParms + "'><button class='mui-btn mui-btn--primary'>Delete</button></a> </td>");
+						out.write("<td><a href='update.jsp?regnum=" + s[0] + "'><button class='mui-btn mui-btn--primary'>TOGGLE FAULT</button></a> </td>");
 					}
 					out.write("</tr>");
 				}
@@ -78,23 +77,6 @@
 				//	out.write("<td><input type='text' name='" + headers[y] +"' required></td>");
 				//}
 				out.write("</table>");
-				
-		%>
-		<script>
-				function update(var x){
-					for(i=0; i<x; x++){
-						var regnum = document.getElementById("regnum"+x).value;
-						var faulted = document.getElementById("faulted"+x).value;
-		<%
-						dbcontroller.Update(%>String(regnum)<%,%>String(faulted)<%);
-		%>
-						window.location="index.jsp?tableName=car&query=1";
-					}
-				}
-		</script>
-		
-		<%
-				out.write("<button class='mui-btn mui-btn--primary' onclick='update("+total+")'>Save</form>");
 			}else{
 				out.write("<BR><BR>NULL<BR><BR>");
 			}
