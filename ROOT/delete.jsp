@@ -58,7 +58,7 @@
 		    	deleteParameters[2][1] = compositeKeys[2];
 			}
 
-			DatabaseController dbc = new DatabaseController;
+			DatabaseController dbc = new DatabaseController();
 
 			Boolean success = false;
 			dbc.Open();
@@ -67,7 +67,7 @@
 			dbc.Close();
 
 			if (success)
-				request.sendRedirect(link);
+				response.sendRedirect(link);
 		%>
 
 	</body>
