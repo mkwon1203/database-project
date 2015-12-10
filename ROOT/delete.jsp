@@ -46,16 +46,18 @@
 
 			DatabaseController dbc = new DatabaseController();
 
-			Boolean success = false;
+			String success = "";
 			dbc.Open();
 			out.write("about to remove from " + tableName);
 			success = dbc.Remove(tableName, deleteParameters);
 			dbc.Commit();
 			dbc.Close();
 			out.write("remove query executed, if successful will redirect <br>");
-			if (success){
+			if (success.equals("")){
 				response.sendRedirect(link);
 				//out.write(tableName + "<br>" + deleteParameters[0][0] + " " + deleteParameters[0][1]);
+			}else {
+				out.write(success);
 			}
 		%>
 
