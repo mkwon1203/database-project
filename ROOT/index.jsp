@@ -191,7 +191,10 @@
                     			out.write("The details of interviews conducted by a given Instructor.");
                     			break;
                     		case 4:
-                    			out.write("The reg number of cars that have had no faults found.");
+                    			out.write("The registration number of cars that have had no faults found.");
+                    			break;
+                    		case 5:
+                    			out.write("The number of administrative staff located at each office.")
                     			break;
                     	}
                     %>
