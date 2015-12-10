@@ -105,7 +105,7 @@
 								primaryKey1 = s[0];
 								if (primaryKeyCount == 3){
 									primaryKey2 = s[1];
-									primaryKey3 = s[3];
+									primaryKey3 = s[2];
 								}
 							} else{
 								primaryKey1value = s[0];
