@@ -78,10 +78,10 @@
 					}
 					
 					//declare strings for the primary keys to pass to delete
-					String primaryKey1, primaryKey2, primaryKey3;
+					String primaryKey1 = "", primaryKey2 = "", primaryKey3 = "";
 
 					//declare strings for primary key values to pass to delete
-					String primaryKey1value, primaryKey2value, primaryKey3value;
+					String primaryKey1value = "", primaryKey2value = "", primaryKey3value = "";
 					//if there are results
 					if(results != null && results.size() > 0){
 						out.write("<table class='mui-table myTable'>");	
