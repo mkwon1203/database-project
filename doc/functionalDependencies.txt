@@ -1,0 +1,15 @@
+Functional Dependencies:
+
+	1. We assume that all trivial functional dependencies speak for themselves in the schema
+	section of our pdf.
+
+	2. {city, addr} -> officeId
+
+All relations satisfy First, Second, and Third Normal Form:
+	1. no set valued attributes.
+	2. no FD's such that X->A where A is a single non-prime attr.
+	3. In the only Functional Dependency, the RHS is a prime attr and the FD is non-trivial.
+
+*NOTE*:
+	{city, addr} is not a superkey of office, thus Boyce-Codd Normal Form is not satisfied.
+
