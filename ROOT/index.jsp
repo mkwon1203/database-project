@@ -73,7 +73,7 @@
 					//if not in the switch, then it's 1 primary key
 					//if it is a table in the switch, there's 3 primary keys
 					int primaryKeyCount = 1;
-					if (table == "lesson" || table == "test" || table == "interview"){
+					if (table.toLowerCase() == "lesson" || table.toLowerCase() == "test" || table.toLowerCase() == "interview"){
 							primaryKeyCount = 3;
 					}
 					
@@ -96,7 +96,7 @@
 							String[] s = results.get(i);
 
 							//delcare a string to store the get parameters for delete
-							String deleteParms = "delete.jsp?tableName=" + tableSelection + "&querySelection=" + querySelection;
+							String deleteParms = "delete.jsp?" + tableSelection + "&" + querySelection;
 
 							//if printing headers, get the attribute name
 							if (i == 0){
