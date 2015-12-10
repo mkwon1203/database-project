@@ -58,6 +58,13 @@
                     </ul>
                 </div>
 				
+				<script>
+					function redirectToEdit(){
+						window.location="edit.jsp";
+					}
+				</script>
+				<button class="mui-btn mui-btn--primary" onclick="redirectToEdit()">Edit Table</button>
+				
 				<%
 					ArrayList<String[]> results = null;
 					DatabaseController dbcontroller = new DatabaseController();
@@ -134,7 +141,7 @@
 								out.write("<th></th>");
 								out.write("</thead>");
 							}else{
-								out.write("<th><a href=\"" + deleteParms + "\"><button class=\"mui-btn mui-btn--primary\">Delete</button></a> </th>");
+								out.write("<td><a href=\"" + deleteParms + "\"><button class=\"mui-btn mui-btn--primary\">Delete</button></a> </td>");
 							}
 							out.write("</tr>");
 						}
@@ -146,7 +153,7 @@
 							out.write("<td><input type='text-field' name='" + headers[y] +"' required></td>");
 						}
 						out.write("</tr></table>");
-						out.write("<input type='submit' value='Insert'></form>");
+						out.write("<input class='mui-btn mui-btn--primary' type='submit' value='Insert'></form>");
 					}else{
 						out.write("<BR><BR>NULL<BR><BR>");
 					}
