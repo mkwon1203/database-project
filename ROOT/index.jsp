@@ -169,7 +169,16 @@
                         Select A Query
                         <span class="mui-caret"></span>
                     </button>
-					<div class="mui--text-title" style="padding: 10px;">
+                    <ul class="mui-dropdown__menu" style="top: 42px;">
+                        <li><a href="index.jsp?<%=tableSelection%>&query=1">Query #1</a></li>
+                        <li><a href="index.jsp?<%=tableSelection%>&query=2">Query #2</a></li>
+                        <li><a href="index.jsp?<%=tableSelection%>&query=3">Query #3</a></li>
+                        <li><a href="index.jsp?<%=tableSelection%>&query=4">Query #4</a></li>
+                        <li><a href="index.jsp?<%=tableSelection%>&query=5">Query #5</a></li>
+                    </ul>
+                </div>
+
+                <div class="mui--text-title" style="padding: 10px;">
                     <% 
                     	switch(Integer.parseInt(query)){
                     		case 1:
@@ -187,14 +196,6 @@
                     	}
                     %>
                     </div>
-                    <ul class="mui-dropdown__menu" style="top: 42px;">
-                        <li><a href="index.jsp?<%=tableSelection%>&query=1">Query #1</a></li>
-                        <li><a href="index.jsp?<%=tableSelection%>&query=2">Query #2</a></li>
-                        <li><a href="index.jsp?<%=tableSelection%>&query=3">Query #3</a></li>
-                        <li><a href="index.jsp?<%=tableSelection%>&query=4">Query #4</a></li>
-                        <li><a href="index.jsp?<%=tableSelection%>&query=5">Query #5</a></li>
-                    </ul>
-                </div>
 
 			<% 
 				//check that query is set
