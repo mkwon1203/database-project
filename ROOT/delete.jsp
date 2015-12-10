@@ -20,10 +20,10 @@
 			String primaryKey1 = "", primaryKey2 = "", primaryKey3 = "";
 
 			//retrive all GET parameters
-			tableName = request.getParameter(paramName);
-		    primaryKey1 = request.getParameter(paramName);
-		    primaryKey2 = request.getParameter(paramName);
-		    primaryKey3 = request.getParameter(paramName);
+			tableName = request.getParameter("tableName");
+		    primaryKey1 = request.getParameter("primaryKey1");
+		    primaryKey2 = request.getParameter("primaryKey2");
+		    primaryKey3 = request.getParameter("primaryKey3");
 	    	link = "index.jsp?tableName=" + tableName + "&query=" + request.getParameter("query");
 
 	    	compositeKeys[0] = request.getParameter("primaryKey1value");
