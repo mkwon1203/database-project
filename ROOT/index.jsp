@@ -73,12 +73,8 @@
 					//if not in the switch, then it's 1 primary key
 					//if it is a table in the switch, there's 3 primary keys
 					int primaryKeyCount = 1;
-					switch (table){
-						case "lesson":
-						case "test":
-						case "interview":
+					if (table == "lesson" || table == "test" || table == "interview"){
 							primaryKeyCount = 3;
-							break;
 					}
 					
 					//declare strings for the primary keys to pass to delete
@@ -124,7 +120,7 @@
 							}
 							//loop through all the attribute values and print table cells
 
-							out.write("<th>   <button class=\"mui-btn mui-btn--primary\"> <a href=\"" + deleteParms + "\">Button</a></button> </th>");
+							out.write("<th><button class=\"mui-btn mui-btn--primary\"> <a href=\"" + deleteParms + "\">Button</a></button> </th>");
 
 							for(int j=0; j<s.length; j++){
 								if(i==0){
