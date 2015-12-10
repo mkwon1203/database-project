@@ -268,7 +268,7 @@ public class DatabaseController {
       ResultSet rs = statement_.executeQuery(query.toString());
       return true;
     } catch (SQLException sqlex){
-      sqlex.printStackTrace;
+      sqlex.printStackTrace();
       return false;
     }
   }
@@ -351,7 +351,7 @@ public class DatabaseController {
 
     //loop through and identify the row by its old data
     for (int i = 0; i < oldPrimaryKeys.length; i++){
-      query.append(oldPrimaryKeys[i][0])
+      query.append(oldPrimaryKeys[i][0]);
       query.append("='");
       query.append(oldPrimaryKeys[i][1]);
       query.append("'");
@@ -378,7 +378,7 @@ public class DatabaseController {
    */
   
 //a) The names and the telephone numbers of the Managers of each office.
-	public ArrayList<String[]> query1() {
+	public ArrayList<String[]> query1() throws SQLException {
 		
 		String sql_query = "select name, phone from rdmelzer.employee where employeeID in (select mgrID from rdmelzer.office)";
     	int templen = 2;
@@ -412,7 +412,7 @@ public class DatabaseController {
 	}
 
 	//d) The total number of staff at each office. 
-	public ArrayList<String[]> query2() {
+	public ArrayList<String[]> query2() throws SQLException {
 		
 		String sql_query = "select count(*), officeID from rdmelzer.employee group by officeID";
     	int templen = 2;
@@ -437,8 +437,8 @@ public class DatabaseController {
 
     	while (rs.next()) {
         	String[] temp = new String[templen]; // represents individual tuple in relation
-        	temp[0] = rs.getInt(1);
-        	temp[1] = rs.getInt("officeID");
+        	temp[0] = rs.getInt(1) + "";
+        	temp[1] = rs.getInt("officeID") + "";
         	result.add(temp);
 
      	} // end of rs.next
@@ -446,7 +446,7 @@ public class DatabaseController {
 	}
 
 	//g) The details of interviews conducted by a given Instructor.
-	public ArrayList<String[]> query3(int instructorID) {
+	public ArrayList<String[]> query3(int instructorID) throws SQLException {
 		
 		String sql_query = "select * from rdmelzer.interview where interview.employeeID = " + instructorID;
     	int templen = 3;
@@ -471,8 +471,8 @@ public class DatabaseController {
 
     	while (rs.next()) {
         	String[] temp = new String[templen]; // represents individual tuple in relation
-        	temp[0] = rs.getInt(1);
-        	temp[1] = rs.getInt(2);
+        	temp[0] = rs.getInt(1) + "";
+        	temp[1] = rs.getInt(2) + "";
         	temp[2] = rs.getTimestamp(3).toString();
         	result.add(temp);
 
@@ -481,9 +481,9 @@ public class DatabaseController {
 	}
 
 	//j) The reg number of cars that have had no faults found.	
-	public ArrayList<String[]> query4() {
+	public ArrayList<String[]> query4() throws SQLException {
 		
-		String sql_query = "select regNum from rdmelzer.car where faulted='N'"
+		String sql_query = "select regNum from rdmelzer.car where faulted='N'";
     	int templen = 1;
    		ResultSet rs = null;
     	ArrayList<String[]> result = null;
@@ -506,7 +506,7 @@ public class DatabaseController {
 
     	while (rs.next()) {
         	String[] temp = new String[templen]; // represents individual tuple in relation
-        	temp[0] = rs.getInt(1);
+        	temp[0] = rs.getInt(1) + "";
         	result.add(temp);
 
      	} // end of rs.next
@@ -514,7 +514,7 @@ public class DatabaseController {
 	}
 	
 	//o) The number of administrative staff located at each office.
-	public ArrayList<String[]> query5() {
+	public ArrayList<String[]> query5() throws SQLException {
 
 		String sql_query = "select count(*), officeID from rdmelzer.employee where jobTitle='Admistrative staff' group by officeID";
     	int templen = 2;
@@ -539,8 +539,8 @@ public class DatabaseController {
 
     	while (rs.next()) {
         	String[] temp = new String[templen]; // represents individual tuple in relation
-        	temp[0] = rs.getInt(1);
-        	temp[1] = rs.getInt("officeID");
+        	temp[0] = rs.getInt(1) + "";
+        	temp[1] = rs.getInt("officeID") + "";
         	result.add(temp);
 
      	} // end of rs.next
