@@ -156,8 +156,8 @@
 						for(int y=0; y<headers.length; y++){
 							out.write("<td><input type='text-field' name='" + headers[y] +"' required></td>");
 						}
+						out.write("<td><input class='mui-btn mui-btn--primary' type='submit' value='Insert'></form></td>");
 						out.write("</tr></table>");
-						out.write("<input class='mui-btn mui-btn--primary' type='submit' value='Insert'></form>");
 					}else{
 						out.write("<BR><BR>NULL<BR><BR>");
 					}
