@@ -22,6 +22,7 @@
 					//if it is a table in the switch, there's 3 primary keys
 					int primaryKeyCount = 1;
 					if (table.toLowerCase() == "lesson" || table.toLowerCase() == "test" || table.toLowerCase() == "interview"){
+							out.write("PRIMARY KEY COUNT IS 3<br>");
 							primaryKeyCount = 3;
 					}
 					String query = request.getParameter("query");
