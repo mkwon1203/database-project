@@ -102,7 +102,7 @@
 					}else{
 						out.write("<BR><BR>NULL<BR><BR>");
 					}
-				
+					dbcontroller.Close();
 				%>
 				
 				
@@ -129,7 +129,9 @@
 				if (query == null){
 					query = "1";
 				}
-
+				
+				dbcontroller = new DatabaseController();
+				dbcontroller.Open();
 				int queryInt = Integer.parseInt(query);
 
 				//switch on the query to have the java class execute the right special query
