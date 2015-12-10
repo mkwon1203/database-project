@@ -145,7 +145,7 @@ public class DatabaseController
 	/**
 	 * Function: DisplayTable(tableName) 
 	 * Description: This function will query for the contents of table with the
-	 * given tablename. Then, it will parse through the result of the query and build 
+	 * given tableName. Then, it will parse through the result of the query and build 
 	 * an ArrayList object containing String arrays, where each array corresponds to
 	 * an individual tuple in the result table. The ArrayList object is then returned.
 	 * 
@@ -287,7 +287,8 @@ public class DatabaseController
 	}
 
 	/**
-	 * Function: Insert(tableName, attrValues) Description: Function will insert
+	 * Function: Insert(tableName, attrValues) 
+   * Description: Function will insert
 	 * a row from the given table. Function assumes valid name input for
 	 * tableName and attrValues, and that the table exists. Function also
 	 * assumes that attribute values are supplied in an order corresponding to
@@ -433,8 +434,8 @@ public class DatabaseController
 	}
 
 	/**
-	 * Function: Update(regNum) Description:
-	 * Function will modify a row with the given regNum from the car relation.
+	 * Function: Update(regNum) 
+	 * Description: Function will modify a row with the given regNum from the car relation.
 	 * The car's faulted value will be flipped. I.e., Y -> N and vice versa.
 	 * 
 	 * @input: regNum (String) - regNum of the car whose faulted value is to be updated
@@ -619,12 +620,12 @@ public class DatabaseController
 	/**
 	 * Function: query3(instructorID)
 	 * Description: This function will execute the query
-	 * The total number of staff at each office. 
+	 * The details of interviews conducted by a given Instructor.
 	 * Then, it will parse through the result of the query and build 
 	 * an ArrayList object containing String arrays, where each array corresponds to
 	 * an individual tuple in the result table. The ArrayList object is then returned.
 	 * 
-	 * @input: CHANGE THIS THING
+	 * @input: instructorID (int) the id of the instructor who's interviews to look up
 	 *
 	 * @return: Return ArrayList containing contents of table where each element is a
 	 * String array containing fields of a given tuple and the table contains the result
@@ -674,7 +675,7 @@ public class DatabaseController
 	/**
 	 * Function: query4()
 	 * Description: This function will execute the query
-	 * The reg number of cars that have had no faults found.
+	 * The registration number of cars that have had no faults found.
 	 * Then, it will parse through the result of the query and build 
 	 * an ArrayList object containing String arrays, where each array corresponds to
 	 * an individual tuple in the result table. The ArrayList object is then returned.

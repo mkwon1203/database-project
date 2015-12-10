@@ -164,12 +164,29 @@
             <div class="mui-panel">
 
                 <!--dropdown to select table to display-->
-                <div class="mui-dropdown myDropdown">
+                <div class="mui-dropdown myDropdown" style="display: inline-flex;">
                     <button class="mui-btn mui-btn--primary" data-mui-toggle="dropdown">
                         Select A Query
                         <span class="mui-caret"></span>
                     </button>
-                    <div class="mui--text-title">The names and the telephone numbers of the Managers of each office.</div>
+					<div class="mui--text-title" style="padding: 10px;">
+                    <% 
+                    	switch(Integer.parseInt(query)){
+                    		case 1:
+                    			out.write("The names and the telephone numbers of the Managers of each office.");
+                    			break;
+                    		case 2:
+                    			out.write("The total number of staff at each office. ");
+                    			break;
+                    		case 3:
+                    			out.write("The details of interviews conducted by a given Instructor.");
+                    			break;
+                    		case 4:
+                    			out.write("The reg number of cars that have had no faults found.");
+                    			break;
+                    	}
+                    %>
+                    </div>
                     <ul class="mui-dropdown__menu" style="top: 42px;">
                         <li><a href="index.jsp?<%=tableSelection%>&query=1">Query #1</a></li>
                         <li><a href="index.jsp?<%=tableSelection%>&query=2">Query #2</a></li>
