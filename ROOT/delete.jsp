@@ -54,10 +54,10 @@
 			success = dbc.Remove(tableName, deleteParameters);
 			dbc.Commit();
 			dbc.Close();
-			out.write("remove query executed, if successful will redirect");
+			out.write("remove query executed, if successful will redirect <br>");
 			if (success){
 				//response.sendRedirect(link);
-				out.write(tableName + "<br>" + compositeKeys[0] + "<br>" + compositeKeys[1] + "<br>" + compositeKeys[2] + "<br>");
+				out.write(tableName + "<br>" + deleteParameters[0][0] + " " + deleteParameters[0][1]);
 			}
 		%>
 
