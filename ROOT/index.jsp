@@ -33,7 +33,7 @@
 					}else{
 						querySelection += "query=" + query;
 					}
-					
+					insertParams = tableSelection+"&"+querySelection;
 				%>
                 <!--dropdown to select table to display-->
                 <div class="mui-dropdown myDropdown">
@@ -92,7 +92,8 @@
 							}
 							out.write("</tr>");
 						}
-						out.write("<tr><form action='index.jsp?" + insertParams + "' method='POST'>");
+						out.write("<tr><form action='insert.jsp' method='POST'>");
+						out.write("<input type='text-field' name='link' style='display:none' value='" + insertParams + "'>");
 						String[] headers = results.get(0);
 						for(int y=0; y<headers.length; y++){
 							out.write("<td><input type='text-field' name='" + headers[y] +"'></td>");
