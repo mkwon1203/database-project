@@ -1,6 +1,7 @@
 
 package dbController;
 
+import java.io.PrintWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
@@ -334,23 +335,33 @@ public class DatabaseController {
     query.append(tableName);
     query.append(" WHERE ");
 
-//attrValues.length
     //loop through the attributes and append them to the WHERE clause
-    for (int i = 0; i < 1; i++){
-      query.append(attrValues[i][0]);
+//    for (int i = 0; i < attrValues.length; i++){
+//      query.append(attrValues[i][0]);
+//      query.append("='");
+//      query.append(attrValues[i][1]);
+//      query.append("'");
+      
+      query.append(attrValues[0][0]);
       query.append("='");
-      query.append(attrValues[i][1]);
+      query.append(attrValues[0][1]);
       query.append("'");
 
       //if not at the last attribue, add an AND clause
-      if (i != attrValues.length-1){
-        query.append(" AND ");
-      }
-    }
+//      if (i != attrValues.length-1){
+//        query.append(" AND ");
+//      }
+//    }
 
-    PrintWriter writer = new PrintWriter("dbc-remove.log", "UTF-8");
-    writer.println(query.toString());
-    writer.close();
+    try{
+	    PrintWriter writer = new PrintWriter("dbc-remove.log");
+	    writer.println(query.toString());
+	    writer.close();
+    }
+    catch (FileNotFoundException ex)
+    {
+    	ex.printStackTrace();
+    }
     
     //try to execute the query and return true on success
     //print stack trace and return false if unsuccessful
@@ -375,50 +386,42 @@ public class DatabaseController {
   *
   * @return: Return True if successful, False otherwise
   **/
-  public boolean Update(String[][] attrValues, String[][] oldPrimaryKeys){
-	StringBuffer query = new StringBuffer();
-    query.append("UPDATE ");
-    query.append(username);
-    query.append(".car SET ");
-    
-    //loop through the new attrValues and set them
-    for (int i = 0; i < attrValues.length; i++){
-      query.append(attrValues[i][0]);
-      query.append("='");
-      query.append(attrValues[i][1]);
-      query.append("'");
+  public boolean Update(String regNum, String faulted){
+		StringBuffer query = new StringBuffer();
+	    query.append("UPDATE ");
+	    query.append(username);
+	    query.append(".car SET ");
+	    
+	    String newFault = "";
+	    if (faulted.equalsIgnoreCase("Y"))
+	    	newFault = "N";
+	    else if (faulted.equalsIgnoreCase("N"))
+	    	newFault = "Y";
+	    else
+	    	newFault = "Z"; // shouldn't happen
+	    
+	    query.append("faulted");
+	      query.append("='");
+	      query.append(newFault);
+	      query.append("'");
+	    
+	    query.append(" WHERE ");
 
-      //if not on the last iteration of the loop, add a comma seperator
-      if (i != attrValues.length-1){
-        query.append(", ");
-      }
-    }
-    
-    query.append(" WHERE ");
+	    query.append("regNum");
+	      query.append("='");
+	      query.append(regNum);
+	      query.append("'");
 
-    //loop through and identify the row by its old data
-    for (int i = 0; i < oldPrimaryKeys.length; i++){
-      query.append(oldPrimaryKeys[i][0]);
-      query.append("='");
-      query.append(oldPrimaryKeys[i][1]);
-      query.append("'");
-
-      //if not at the last attribute, add an AND clause
-      if (i != oldPrimaryKeys.length-1){
-        query.append(" AND ");
-      }
-    }
-
-    //try to execute the query and return true on success
-    //print stack trace and return false if unsuccessful
-    try{
-      statement_.executeQuery(query.toString());
-      return true;
-    } catch (SQLException sqlex){
-      sqlex.printStackTrace();
-      return false;
-    }
-  }
+	    //try to execute the query and return true on success
+	    //print stack trace and return false if unsuccessful
+	    try{
+	      statement_.executeQuery(query.toString());
+	      return true;
+	    } catch (SQLException sqlex){
+	      sqlex.printStackTrace();
+	      return false;
+	    }
+	  }
   
   /*
    * BELOW ARE QUERIES
