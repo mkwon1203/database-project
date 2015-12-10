@@ -87,6 +87,9 @@
 				dbcontroller.Close();
 				out.write("FINISHED");
 			}
-			response.sendRedirect(link);
+			
+			if(worked){
+				response.sendRedirect(link);
+			}
 		%>
 	</body>

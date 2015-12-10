@@ -258,10 +258,8 @@ public class DatabaseController {
       if (i != attrValues.length-1){
         query.append(",");
       }
-
-      query.append(")");
     }
-    
+	query.append(")");    
     //try to execute the query and return true on success
     //print stack trace and return false if unsuccessful
     try{
