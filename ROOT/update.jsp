@@ -22,8 +22,8 @@
 			
 			boolean worked = false;
 			dbc.Open();
-			worked = out.write("If page does not redirect then something went wrong!<br>Go back and try again!");
-			dbc.Update(regnum);
+			out.write("If page does not redirect then something went wrong!<br>Go back and try again!");
+			worked = dbc.Update(regnum);
 			dbc.Commit();
 			dbc.Close();
 			
